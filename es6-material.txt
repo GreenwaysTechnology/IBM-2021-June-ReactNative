@@ -827,3 +827,679 @@ let sb = new SavingsAccount('B00013444');
 console.log(`Id ${sb.id}  ${sb.deposit()}`)
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+Object De Structuring:
+.....................
+//Extract object properties without using reference variables.
+
+// function printEmployee(employee) {
+//     console.log(`id : ${employee.id}`)
+//     console.log(`name : ${employee.name}`)
+//     console.log(`City : ${employee.address.city}`)
+// }
+//object destructuring syntax
+// function printEmployee(employee) {
+//     const { id, name, address } = employee;
+//     console.log(`id : ${id}`)
+//     console.log(`name : ${name}`)
+//     console.log(`City : ${address.city}`)
+// }
+// function printEmployee({ id, name, address }) {
+//   //  const { id, name, address } = employee;
+//     console.log(`id : ${id}`)
+//     console.log(`name : ${name}`)
+//     console.log(`City : ${address.city}`)
+// }
+// function printEmployee({ id, name, address: { city } }) {
+//     //  const { id, name, address } = employee;
+//     console.log(`id : ${id}`)
+//     console.log(`name : ${name}`)
+//     console.log(`City : ${city}`)
+// }
+const printEmployee = ({ id, name, address: { city } }) => {
+    //  const { id, name, address } = employee;
+    console.log(`id : ${id}`)
+    console.log(`name : ${name}`)
+    console.log(`City : ${city}`)
+};
+
+printEmployee({ id: 1, name: 'Subramanian', address: { city: 'Coimbatore' } });
+
+class Customer {
+    //declare instance variables and methods
+    constructor(id = 1, name = 'ram') {
+        this.id = id;
+        this.name = name;
+    }
+    calculateInvoice() {
+        return 1000;
+    }
+}
+let { id, name, calculateInvoice } = new Customer();
+console.log(`id ${id}`)
+console.log(`Name ${name}`)
+console.log(`Salary ${calculateInvoice()}`)
+///////////////////////////////////////////////////////////////////////////////
+
+//function returns object and how to destructure it.
+
+// function getStock() {
+//     return {
+//         id: 1,
+//         symbol: 'GOOGLE',
+//         qty: 1000,
+//         price: 10000
+//     };
+// }
+//dynamic object values
+// function getStock(id, symbol, qty, price) {
+//     return {
+//         id: id,
+//         symbol: symbol,
+//         qty: qty,
+//         price: price
+//     };
+// }
+//object destrucing
+// function getStock(id, symbol, qty, price) {
+//     //if left : right variables are equal, make it one
+//     return {
+//         id,
+//         symbol,
+//         qty,
+//         price
+//     };
+// }
+// const getStock = (id = 1, symbol = 'default', qty = 0, price = 0) => {
+//     //if left : right variables are equal, make it one
+//     return {
+//         id,
+//         symbol,
+//         qty,
+//         price
+//     };
+// }
+const getStock = (id = 1, symbol = 'default', qty = 0, price = 0) => ({
+    id,
+    symbol,
+    qty,
+    price
+});
+
+console.log(getStock(2, 'Microsoft', 450, 8000));
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Async programming:
+
+Styles of async programming:
+
+1.callback style
+2.promises
+3.async await
+
+What is async/nonblocking?
+ javascript engine is single threaded, meaning we cant create more threads to perform
+multi tasking.
+ js uses different threading model - worker thread model.
+ any blocking operations- such as networking,long running tasking, to be scheduled outside
+js engine mostly on os kernals, return result once it completed via event notification. main thread process events and retrive results
+
+How to implement async programming?
+
+1.js provides high level apis through which only we can schdule jobs.
+  apis -  timer,ajax(XMLHttpRequest),websocket,dom events....
+2.js provides to handle processed result- function -callback function/handler function.
+
+ eg:
+  user asks some data from network
+
+ user-------browser---js engine--main thread----submit job to os kernal---|thread is not blocked------process is going on --once process is finished in the kernal with data---os send event(signal for data)----------main thread receives event and assigns to a function (callback function) to handle processed data.
+
+steps:
+
+1.you have to use high level api - settimout
+2.you have to cb function - function as param.
+
+
+callback style:
+
+function sayHello(){
+    console.log('hello')
+}
+function delay(callback){
+  setTimeout(callback,5000,'hello!!!')
+}
+delay(function(data){
+    console.log('delay',data)
+});
+sayHello();
+////////////////////////////////////////////////////////////////////////////////////////////
+complex async programming:
+..........................
+
+const getUser = (resolve, reject) => {
+    let user = { id: 1, name: 'ram' };
+    //user=null;
+    if (user) {
+        setTimeout(resolve, 1000, user);
+    } else {
+        setTimeout(reject, 1000, { message: 'No user found' });
+    }
+};
+getUser(user => console.log(user), err => console.log(err));
+
+callback nesting :
+  
+  The output of one callback will be input to another callback.
+
+
+const getUser = (resolve, reject) => {
+    let user = { id: 1, name: 'ram' };
+    //user=null;
+    if (user) {
+        setTimeout(resolve, 1000, user);
+    } else {
+        setTimeout(reject, 1000, { message: 'No user found' });
+    }
+};
+
+const login = (user, resolve, reject) => {
+    if (user.name === 'ram') {
+        setTimeout(resolve, 1000, 'login success');
+    } else {
+        setTimeout(reject, 1000, { message: 'login failed' });
+    }
+}
+//show page  based on login
+const showPage = (status, resolve, reject) => {
+    if (status === 'login success') {
+        setTimeout(resolve, 1000, 'You are registered User');
+    } else {
+        setTimeout(reject, 1000, { message: 'You are guest' });
+    }
+}
+
+
+getUser(user => {
+    console.log('user is called');
+    login(user, status => {
+        console.log('login is called');
+        showPage(status, rpage => {
+            console.log('show page is called');
+            console.log(rpage)
+        }, gpage => console.log(gpage));
+    }, err => console.log(err))
+}, err => console.log(err));
+
+
+callback hell:
+Questions:
+
+1.Whether this is able to understand quickly
+2.Whether this code is able to debug
+3.Whehter this code is scalable?
+4.whether this code is maintaiable?
+
+  "No" : This is what we call as "Callback hell".
+
+fs.readdir(source, function (err, files) {
+  if (err) {
+    console.log('Error finding files: ' + err)
+  } else {
+    files.forEach(function (filename, fileIndex) {
+      console.log(filename)
+      gm(source + filename).size(function (err, values) {
+        if (err) {
+          console.log('Error identifying file size: ' + err)
+        } else {
+          console.log(filename + ' : ' + values)
+          aspect = (values.width / values.height)
+          widths.forEach(function (width, widthIndex) {
+            height = Math.round(width / aspect)
+            console.log('resizing ' + filename + 'to ' + height + 'x' + height)
+            this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
+              if (err) console.log('Error writing file: ' + err)
+            })
+          }.bind(this))
+        }
+      })
+    })
+  }
+})
+
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+///////////////////////////////////////////////////////////////////////////////////////////
+
+How to write better callback programming /async/non blocking ? or How to avoid callback hell?
+
+
+In 2005, JQUERY team started with working complex callback patterns, they found callback hell problem.
+
+They proposed a  Design pattern to write better callback programming(Async) programming.
+
+  "Promise".
+
+Promise is design pattern which hides complexity of callback patterns
+
+
+SInce Promise is design pattern, many people have implemented Promise design pattern.
+
+1.JQuery -first promise implementation
+2.many libs and frameworks
+
+2012 E6 Committe introduced promise design pattern  as  "Promise" Object  in javascript.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Promise Object:
+..............
+ 
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+Promises and non blocking,async and callback hell issues:
+.........................................................
+
+features of Promise Object:
+
+1.Promise by deafult is Async. Which implements timer api with 0 ms .
+
+Promise can be used with any async callback based  implementations.
+
+Objective:
+
+ To remove callbacks in async/non blocking code. write cleaner async programming.
+ To remove complex callback chaining code.
+
+
+Promise Implemenation:
+
+1. Create Promise Object from Promise contructor
+2. Create Promise object from factory apis 
+
+Promise object methods:
+1.then - success
+2.catch - errors
+3.finally - clean up
+factory api to create Promise object
+4.resolve
+5.reject
+.......................................
+6.all
+7.race
+
+
+//promise object creation ; using factory api
+
+function sayHello() {
+    return 'Hello'
+}
+//success only
+function delay() {
+    return Promise.resolve('delay')
+}
+delay().then(res => console.log(res))
+console.log(sayHello())
+
+
+//failure only
+function delayWithError() {
+    return Promise.reject('delay with reject')
+}
+delayWithError().catch(err => console.log(err))
+
+//success and failure
+function delayWithBoth() {
+    let message = 'hello';
+    if (message) {
+        return Promise.resolve(message)
+    } else {
+        return Promise.reject('something went wrong')
+    }
+}
+delayWithBoth()
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+//////////////////////////////////////////////////////////////////////////////
+
+//promise object using constructors.
+// if you want to convert any existing callbacks into promises
+function getUser() {
+    let user = { id: 1, name: 'ram' };
+    if (user) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 5000, user);
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 5000, { message: 'User not found' });
+        });
+    }
+}
+//
+getUser()
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+
+
+how to write nested callbacks using promises
+
+
+
+const getUser = () => {
+    let user = { id: 1, name: 'ram' };
+    //user=null;
+    let err = {
+        message: 'User not found'
+    }
+    if (user) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 1000, user)
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, err)
+        });
+    }
+};
+
+const login = user => {
+    let status = "Login success"
+    let err = "Login failed"
+    if (user.name === 'ram') {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 1000, status)
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, err)
+        });
+    }
+}
+//show page  based on login
+const showPage = status => {
+    if (status === 'login success') {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 1000, { message: 'You are registered user' });
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, { message: 'You are guest' });
+        });
+    }
+}
+
+// getUser(user => {
+//     console.log('user is called');
+//     login(user, status => {
+//         console.log('login is called');
+//         showPage(status, rpage => {
+//             console.log('show page is called');
+//             console.log(rpage)
+//         }, gpage => console.log(gpage));
+//     }, err => console.log(err))
+// }, err => console.log(err));
+getUser()
+    .then(user => {
+        console.log('user is called');
+        login(user).then(status => {
+            console.log('login is called');
+            showPage(status)
+                .then(page => {
+                    console.log('show page is called');
+                    console.log(page)
+                })
+                .catch(err => console.log(err))
+        }).catch(err => console.log(err))
+    })
+    .catch(err => console.log(err));
+
+getUser()
+    .then(user => {
+        console.log('Get user is called', user)
+        return login(user)
+    })
+    .then(status => {
+        console.log('login is called', status);
+        return showPage(status);
+    })
+    .then(page => {
+        console.log('show page is called', page)
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+getUser()
+    .then(user => login(user))
+    .then(status => showPage(status))
+    .then(page => console.log('show page is called', page))
+    .catch(err => {
+        console.log(err);
+    });
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+async and await ; es 7 keywords
+
+
+Promise Hell: Promise has limitions;
+......................
+
+1.Promise is still  complex when you start scalling complex async operations.
+
+2.Which is not readable ,which uses lot of then, catch blocks
+
+In order to write even simple complex async work flows ES 7 introduced
+a concept called "async await" keywords
+
+ It is simplest pattern of Promises.
+ It is promise driven only.
+
+         "Sync style of Async Code" 
+
+async key must be used with function declaration.
+await is used to pause async calls
+
+
+async ;
+
+-used in front of function declaration ; those functions are called async function.
+
+async is keyword must be used infront of function- async functions
+
+
+async function returns Promise Object ---promise.resolve
+
+//async function 
+
+async function getValue(){
+    return 10; // Promise.resolve(10);
+}
+console.log(getValue())
+getValue().then(value=>console.log(value));
+
+async function getValueWithPromise(){
+    return Promise.reject('errr');
+}
+
+//async..await
+const getUser = () => {
+    let user = { id: 1, name: 'ram' };
+    //user=null;
+    let err = {
+        message: 'User not found'
+    }
+    if (user) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 1000, user)
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, err)
+        });
+    }
+};
+
+const login = user => {
+    let status = "Login success"
+    let err = "Login failed"
+    if (user.name === 'ram') {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 1000, status)
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, err)
+        });
+    }
+}
+//show page  based on login
+const showPage = status => {
+    if (status === 'Login success') {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, 1000, { message: 'You are registered user' });
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            setTimeout(reject, 1000, { message: 'You are guest' });
+        });
+    }
+}
+
+async function main() {
+    // getUser()
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err))
+    try {
+        const user = await getUser();
+        const status = await login(user);
+        const page = await showPage(status);
+        console.log(user, status, page);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+main();
+////////////////////////////////////////////////////////////////////////////////////////////
+Javascript modularity:
+
+
+Modularity:
+..........
+
+In java Modularity , is presented via "Packages"
+
+Package organize the code  logically.
+
+Customer.java
+
+package com.ibm.cms
+
+public class Customer{}
+
+Java organizes code folders and files Physically.
+
+d:/javaapps/src/
+    com/ibm/cms/Customer.java
+
+
+What about javascript Modularity?
+
+ Javascript is file based modularity physically
+ but logically there is no such modularity at language level.
+
+ collection of variable declarations and function.
+
+Once js started growing in large scale, dev struck to organize code.
+
+2000, Smart developers started thinking about how to modualrize js code.
+ 
+
+Module design patterns came.
+
+1.Namespace design pattern : 2000 : jquery
+2.AMD -Async Module Defintion : dojo
+---------------------------------------------------------
+3.CJS - Common JS =  namespace + amd
+4.ES 6 Module design pattern  = amd + cjs
+------------------------------------------------------------
+5.System = AMD = CJS + ES 6
+6.UMD = NAMESPACE + AMD + CJS = ES 6
+
+
+only two design patterns are used in development
+
+1.CJS - Common JS =  namespace + amd
+2.ES 6 Module design pattern  = amd + cjs
+
+
+ES 6 modules:
+.............
+
+1.how link files
+2.how to share code among files
+
+code- variables,functions,classes,object
+
+ES 6 module design pattern keywords
+
+for code sharing
+1.export
+2.export default
+
+//link files and get data.
+3.import
+
+export is used to share any type of code to another files
+
+export const variable=value
+
+import is used link and get shared code
+
+import {} from './filename';
+
+if run the code, inside browser it wont run, browser dont have linker or loader to link files.
+
+how to add loader or linker to webbrowser?
+ third parties are providing this.
+
+webpack :
+  it is build tool provides loaders and linkers to run any modules on browser.
+
+steps:
+
+1.npm install webpack webpack-cli --save-dev
+
+2.create file
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  }
+};
+3.add scripts
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+
+4.build  
+  npm run build
+
+5.test in browser
+/////////////////////////////////&&&&&&&&&&&&&&&&&///////////////////////////////////////////
+
+
+
+
+
+
+
+
+

@@ -1,22 +1,13 @@
-class Account {
-    constructor(id = 'A00010000') {
-        this.id = id;
-        console.log('account')
-    }
-    deposit() {
-        return 1.5;
-    }
-}
+import TodoService, { foo } from './services/TodoService';
 
-class SavingsAccount extends Account {
-    constructor(id) {
-        super(id)
-        console.log('savings account')
+async function main() {
+    let { findAll } = new TodoService();
+    try {
+        console.log(await findAll())
+        console.log(foo)
     }
-    //overriding :method redefining
-    deposit() {
-        return 1500 + super.deposit();
+    catch (err) {
+
     }
 }
-let sb = new SavingsAccount('B00013444');
-console.log(`Id ${sb.id}  ${sb.deposit()}`)
+main()

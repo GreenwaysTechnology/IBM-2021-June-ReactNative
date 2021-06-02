@@ -1,0 +1,1 @@
+(()=>{"use strict";!async function(){let{findAll:o}=new class{constructor(){console.log("todo constructor")}findAll(){return new Promise(((o,t)=>{setTimeout(o,5e3,"findall")}))}};try{console.log(await o()),console.log("bar")}catch(o){}}()})();
