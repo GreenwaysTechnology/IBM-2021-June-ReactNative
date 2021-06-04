@@ -921,3 +921,777 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 ..............................................................................................
 
+..............................................................................................
+
+Code refactoring:
+
+1.barrel export
+................
+
+Use case :
+
+src/header.jsx
+import React from 'react';
+
+export const HeaderComponent = () => <div>
+    <h1>Site Header</h1>
+</div>
+
+src/banner.jsx
+import React from 'react';
+
+import React from 'react';
+
+export const BannerComponent = () => <div>
+    <h1>Banner</h1>
+</div>
+
+src/index.js
+import { HeaderComponent } from './header/header'; 
+                                      |     |
+                                    folder  fileName
+
+import { HeaderComponent } from './header/header';
+import { BannerComponent } from './header/banner';
+
+here we are importing two files from one folder.what if i have many files in the same folder
+if want to import.
+
+ This can be refactored - using barrel export.
+
+Steps:
+
+1.inside any folder create file "index.js" -header/index.js
+
+2.reexport all components from that folder.
+  header/index.js
+   //reexport
+export { HeaderComponent } from './header'
+export { BannerComponent } from './banner';
+
+3.import where ever you want.
+import { BannerComponent, HeaderComponent } from './header';
+ you can refer only folder, files are refered from 'index.js' automatically.
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Refactoring code:
+
+ReactDOM.render method using object destructuring syntax.
+
+import React from 'react';
+import { render } from 'react-dom';
+
+const Greeting = () => <h1>Hello</h1>;
+
+
+render(<Greeting />, document.getElementById('root'));
+
+///////////////////////////////////////////////////////////////////////////////////////////
+Fragments:
+
+How to avoid unncessary root /container elements?
+The React.Fragment component lets you return multiple elements in a render() method without creating an additional DOM element.
+
+import React, { Fragment } from 'react';
+import { render } from 'react-dom';
+
+// const Greeting = () => <div>
+//                           <h1>Hello</h1><p>welcome</p>
+//                     </div>;
+// const Greeting = () => <React.Fragment>
+//     <h1>Hello</h1><p>welcome</p>
+// </React.Fragment>;
+// const Greeting = () => <Fragment>
+//     <h1>Hello</h1><p>welcome</p>
+// </Fragment>;
+const Greeting = () => <>
+    <h1>Hello</h1><p>welcome</p>
+</>;
+render(<Greeting />, document.getElementById('root'));
+
+
+class Table extends React.Component {
+  render() {
+    return (
+      <table>
+        <tr>
+          <Columns />
+        </tr>
+      </table>
+    );
+  }
+}
+class Columns extends React.Component {
+  render() {
+    return (
+      <>
+        <td>Hello</td>
+        <td>World</td>
+      </>
+    );
+  }
+}
+
+
+Result :
+
+<table>
+  <tr>
+      <td>Hello</td>
+      <td>World</td>
+  
+  </tr>
+</table>
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Data and React:
+
+ Data binding- insert data into html dynamically.
+ {value} {variable} {expression} {functioncall()}
+
+//Component : data binding
+import { render } from 'react-dom';
+import React from 'react';
+
+function getValue(){
+    return 1000;
+}
+
+const DisplayBoardComponent = () => {
+    const magicNo =100;
+    const message = "Hello"
+    const isEnabled=true;
+    const product = {
+        id:1,
+        name:'product'
+    }
+    return <div>
+        <h1>Data Binding</h1>
+        <h2>String {"Hello"} {message}</h2>
+        <h2>Number {10} {magicNo}</h2>
+        <h2>Boolean {true ? "Enabled" : "Disabled"} {isEnabled ? "Enabled" : "Disabled"}</h2>
+        <h2>Object {product.id} {product.name}</h2>
+        <h2>Function {getValue()}</h2>
+    </div>
+};
+render(<DisplayBoardComponent />, document.getElementById('root'));
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+functional programming;
+
+React core design based on functional programming.
+
+fp principles react uses
+
+1.pure function and immuablity.
+
+
+pure:
+
+1.pure function
+ 
+A.function which receives input, return the same =>function never modify the input
+
+ function  display(input){
+         return input
+  }
+ input===>input(as out put)
+
+ impure function;
+ function  display(input){
+         return input *11
+  }
+
+Props(property) Pattern:
+
+ Property is place holder holding Application data.
+
+ Which is passed to a component as parameter, The component binds that data without changing
+
+Every Component is pure function with respect props.
+
+props are encapsulated into an literal object.
+
+<Display name="Subramanian" message="Hello" />
+         |
+     properties
+
+
+import { render } from 'react-dom';
+import React from 'react';
+
+//function is pure function.
+function display(data1, data2) {
+    return data1;
+}
+const res = display(100, 200)
+console.log(res);
+
+//component : pure function 
+//data is variable which points literal object
+// function Display(foo) {
+//     console.log(foo)
+//     return <h1>
+//        {foo.message} {foo.name}
+//     </h1>
+// }
+// function Display(props) {
+//     console.log(props)
+//     return <h1>
+//         {props.message} {props.name}
+//     </h1>
+// }
+// const Display = (props) => {
+//     console.log(props)
+//     return <h1>
+//         {props.message} {props.name}
+//     </h1>
+// }
+// const Display = props => <h1>
+//     {props.message} {props.name}
+// </h1>
+const Display = ({ message, name }) => <h1>
+    {message} {name}
+</h1>
+
+render(<Display name="Subramanian" message="Hello" />, document.getElementById('root'))
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+What could be props?
+  simple primitives - numbers,strings,booleans,undefined....
+  objects - literals , arrays
+  function as prop
+  component as prop
+
+Props can be passed to one component from that component y can pass to another component.
+
+import {render} from 'react-dom';
+import React from 'react';
+
+const ProfileComponent = props => <div>
+    <h1>Profile Information</h1>
+    <h2>FirstName {props.firstName}</h2>
+    <h2>Last Name {props.lastName}</h2>
+    <h2>City {props.city}</h2>
+    <h2>State {props.state}</h2>
+    <h2>Active {props.active ? 'Active' : 'Not Active'}</h2>
+    <h2>Likes {props.likes}</h2>
+    <h2>Contact {props.contact.email} {props.contact.phone}</h2>
+</div>
+
+
+const lastName = 'Murugan';
+const city = "Coimbatore";
+const state = "Tamil nadu";
+const active = true;
+const likes = 1000;
+const contact = {
+    email: 'admin@foo.com',
+    phone: '9003706368'
+}
+
+render(<ProfileComponent 
+    firstName="Subramanian" 
+    lastName={lastName}
+    city={city}
+    state={state}
+    active={active}
+    likes={likes}
+    contact={contact}    />,
+    document.getElementById('root'));
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Why Props?
+ ->Props pattern ensure your UI never mutates(changes) the data accidently 
+   so that UI always will be consistent.
+ Props are only for display not for changing.
+What if i change props?
+  react will throw error.
+
+TypeError: Cannot assign to read only property 'firstName' of object '#<Object>'
+ProfileComponent
+C:/session/ibm/2021/march/reactnative/myreactapp/src/index.js:5
+  2 | import React from 'react';
+  3 | 
+  4 | const ProfileComponent = props => {
+> 5 |     props.firstName = "Ram";
+  6 |     return <div>
+  7 |         <h1>Profile Information</h1>
+  8 |         <h2>FirstName {props.firstName}</h2>
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Which component pattern supports props ?
+ -function components
+ -class component
+ -variable pattern does not support.
+
+function components:
+ -receives props as arg.
+ 
+
+class component:
+
+props are not passed as a parameter like functions.
+
+in classes props is variable which is derived React.Component
+
+Component class:
+...............
+Component is super class of a component which has
+
+1.instance variables
+props
+state
+2.instance methods
+3.static variables
+
+
+How props works inside class?
+
+ props is just variable,having default value is empty literal object
+as soon as we property from markup, props variable will have new property
+
+props = {}
+
+<Cmp prop="something"
+
+props = {prop:"something"}
+
+Object augmentation:
+...................
+
+import { render } from 'react-dom';
+import React, { Component } from 'react';
+
+
+//object augmentation : expanding or shrinking object dynamically 
+
+let message = {} // empty
+console.log(message);
+//augment ; add,remove,update 
+//add
+message.towhom = 'Ram'
+console.log(message);
+//update
+message.towhom = 'geetha'
+message.greet = 'hello'
+console.log(message);
+//delete
+delete message.greet;
+console.log(message);
+
+class ProfileComponent extends Component {
+
+    render() {
+        console.log(this.props)
+        const { firstName, lastName, city, state, active, likes, contact: { email, phone } } = this.props;
+        // return <div> 
+        //     <h1>Profile Information</h1>
+        //     <h2>FirstName {this.props.firstName}</h2>
+        //     <h2>Last Name {this.props.lastName}</h2>
+        //     <h2>City {this.props.city}</h2>
+        //     <h2>State {this.props.state}</h2>
+        //     <h2>Active {this.props.active ? 'Active' : 'Not Active'}</h2>
+        //     <h2>Likes {this.props.likes}</h2>
+        //     <h2>Contact {this.props.contact.email} {this.props.contact.phone}</h2>
+        // </div>
+        return <div>
+            <h1>Profile Information</h1>
+            <h2>FirstName {firstName}</h2>
+            <h2>Last Name {lastName}</h2>
+            <h2>City {city}</h2>
+            <h2>State {state}</h2>
+            <h2>Active {active ? 'Active' : 'Not Active'}</h2>
+            <h2>Likes {likes}</h2>
+            <h2>Contact {email} {phone}</h2>
+        </div>
+    }
+}
+
+
+const lastName = 'Murugan';
+const city = "Coimbatore";
+const state = "Tamil nadu";
+const active = true;
+const likes = 1000;
+const contact = {
+    email: 'admin@foo.com',
+    phone: '9003706368'
+}
+
+render(<ProfileComponent
+    firstName="Subramanian"
+    lastName={lastName}
+    city={city}
+    state={state}
+    active={active}
+    likes={likes}
+    contact={contact}
+/>,
+
+    document.getElementById('root'));
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+DefaultProperty:
+
+//default Props
+ProfileComponent.defaultProps = {
+    firstName: 'defaultName'
+}
+
+
+import { render } from 'react-dom';
+import React, { Component } from 'react';
+
+// class ProfileComponent extends Component {
+//     render() {
+//         console.log(this.props)
+//         const { firstName, lastName, city, state, active, likes, contact: { email, phone } } = this.props;
+//         return <div>
+//             <h1>Profile Information</h1>
+//             <h2>FirstName {firstName}</h2>
+//             <h2>Last Name {lastName}</h2>
+//             <h2>City {city}</h2>
+//             <h2>State {state}</h2>
+//             <h2>Active {active ? 'Active' : 'Not Active'}</h2>
+//             <h2>Likes {likes}</h2>
+//             <h2>Contact {email} {phone}</h2>
+//         </div>
+//     }
+// }
+const ProfileComponent = ({ firstName, lastName, city, state, active, likes, contact: { email, phone } }) => <div>
+    <h1>Profile Information</h1>
+    <h2>FirstName {firstName}</h2>
+    <h2>Last Name {lastName}</h2>
+    <h2>City {city}</h2>
+    <h2>State {state}</h2>
+    <h2>Active {active ? 'Active' : 'Not Active'}</h2>
+    <h2>Likes {likes}</h2>
+    <h2>Contact {email} {phone}</h2>
+</div>;
+
+
+const lastName = 'Murugan';
+const city = "Coimbatore";
+const state = "Tamil nadu";
+const active = true;
+const likes = 1000;
+const contact = {
+    email: 'admin@foo.com',
+    phone: '9003706368'
+}
+
+//default Props
+ProfileComponent.defaultProps = {
+    firstName: 'firstName',
+    lastName:'lastName'
+}
+
+render(<ProfileComponent
+   
+    city={city}
+    state={state}
+    active={active}
+    likes={likes}
+    contact={contact}
+/>,
+
+    document.getElementById('root'));
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Property Validation: Constriants:
+
+ java script is type less  , you cant  have type validation , when u built apps.
+
+eg:
+  if i have property called age, should be always numbers, what if i pass strings.
+
+ is there any way to check type verification.
+
+React offers  a facility to check type viloation and other vaildation during dev cycle.
+
+
+how to apply property type and validation:
+
+ReactComponent has static property "propTypes"
+
+Component.propTypes = { 
+ 
+  id:rule
+
+}
+how to tell rules?
+ rules are mentioned in a separate module
+
+
+npm install --save prop-types
+
+import PropTypes from 'prop-types';
+
+
+import { render } from 'react-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const ProfileComponent = ({ firstName, lastName, city, state, active, likes, contact: { email, phone } }) => <div>
+    <h1>Profile Information</h1>
+    <h2>FirstName {firstName}</h2>
+    <h2>Last Name {lastName}</h2>
+    <h2>City {city}</h2>
+    <h2>State {state}</h2>
+    <h2>Active {active ? 'Active' : 'Not Active'}</h2>
+    <h2>Likes {likes}</h2>
+    <h2>Contact {email} {phone}</h2>
+</div>;
+//define property rules
+ProfileComponent.propTypes = {
+    firstName: PropTypes.string.isRequired,
+    likes: PropTypes.number
+}
+const firstName = "Subramanian"
+const lastName = 'Murugan';
+const city = "Coimbatore";
+const state = "Tamil nadu";
+const active = true;
+const likes = 100;
+const contact = {
+    email: 'admin@foo.com',
+    phone: '9003706368'
+}
+
+render(<ProfileComponent
+    lastName={lastName}
+    city={city}
+    state={state}
+    active={active}
+    likes={likes}
+    contact={contact}
+/>, document.getElementById('root'));
+
+
+Test in the browser console, see the below warning
+index.js:1 Warning: Failed prop type: The prop `firstName` is marked as required in `ProfileComponent`, but its value is `undefined`.
+    at ProfileComponent (http://localhost:3000/static/js/main.chunk.js:30:3)
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Arrays and React:
+
+arrays api:
+ iterator
+  for... --
+  for...each -- mutable apis
+  map - pure function : returns new array
+  filter
+  reduce
+ ..........
+
+
+based on array we can build lot of layouts
+
+1.listview -ul .. li
+2.cardview - div,header,footer...
+3.gridview -table tr
+
+Simple array:
+import { render } from 'react-dom';
+import React from 'react';
+
+
+// const Courses = props => {
+//     console.log(props.courses)
+//     return <div>
+//         <h1>Courses</h1>
+//         <ul>
+//             {courses.map((course, index) => {
+//                 return <li key={index}>{course}</li>
+//             })}
+//         </ul>
+//     </div>
+// };
+const Courses = props => {
+    console.log(props.courses)
+    return <div>
+        <h1>Courses</h1>
+        <ul>
+            {courses.map((course, index) => <li key={index}>{course}</li>)}
+        </ul>
+    </div>
+};
+
+const courses = ['javascript', 'react', 'node', 'angular', 'reactnative'];
+
+render(<Courses courses={courses} />, document.getElementById('root'));
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+import { render } from 'react-dom';
+import React from 'react'
+import { photos } from './mock-data/photos';
+
+
+const Photos = props => {
+    console.log(props.photos)
+    return <div>
+        {
+            props.photos.map((photo, index) => {
+                return <div key={index}>
+                    <h1>{photo.title}</h1>
+                    <img src={photo.thumbnailUrl} />
+                </div>
+            })
+        }
+    </div>
+};
+render(<Photos photos={photos} />, document.getElementById('root'));
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+How to add styling to component?  - CSS.
+
+How to add css?
+
+two ways:
+
+using class attribute : external style.
+using style attribute : inline
+
+<h1 class="test">
+<h1 style="test">
+
+html syntax:
+<div class="container">
+
+</div>
+
+React uses jsx syntax
+
+Rule for html attributes
+
+3. html attributes must be in in camel case
+
+HTML ATTRIBUTES
+
+accept acceptCharset accessKey action allowFullScreen alt async autoComplete
+autoFocus autoPlay capture cellPadding cellSpacing challenge charSet checked
+cite classID className colSpan cols content contentEditable contextMenu controls
+controlsList coords crossOrigin data dateTime default defer dir disabled
+download draggable encType form formAction formEncType formMethod formNoValidate
+formTarget frameBorder headers height hidden high href hrefLang htmlFor
+httpEquiv icon id inputMode integrity is keyParams keyType kind label lang list
+loop low manifest marginHeight marginWidth max maxLength media mediaGroup method
+min minLength multiple muted name noValidate nonce open optimum pattern
+placeholder poster preload profile radioGroup readOnly rel required reversed
+role rowSpan rows sandbox scope scoped scrolling seamless selected shape size
+sizes span spellCheck src srcDoc srcLang srcSet start step style summary
+tabIndex target title type useMap value width wmode wrap
+
+
+how to link css in react?
+
+import css files inside index.js
+
+can we import css?
+yes, this is the concept of webpack.
+
+you can import any thing - css,image,documents(static assets)
+
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
+
+
+
+import { render } from 'react-dom';
+import React from 'react';
+// import './App.css'
+// import './index.css';
+import 'bootstrap/dist/css/bootstrap.css'
+
+const Courses = props => {
+    console.log(props.courses)
+    return <div className="container">
+        <h1>Courses</h1>
+        <ul className="list-group list-group-flush">
+            {courses.map((course, index) =>
+                <li className="list-group-item" key={index}>{course}</li>)}
+        </ul>
+    </div>
+};
+
+const courses = ['javascript', 'react', 'node', 'angular', 'reactnative'];
+
+render(<Courses courses={courses} />, document.getElementById('root'));
+//////////////////////////////&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&/////////////////////////////
+
+Component compostion and Uni directional data flow:
+...................................................
+
+Component Communication;
+  how components are going to communicate each other.
+  during communication you can pass data.
+
+1.parent to child
+   via properties.    
+2.child to parent
+   
+3.siblings : across
+
+
+Flux : 
+ It is design pattern, pass data from one component to component uni directional way.
+ parent to child.
+
+Types of Components :
+
+ COmponents are classified into various category.
+
+Component responsiability:
+
+Component receives data from outside(api,other data sources),the same component is used
+to display data. => We should not do this.
+
+Break component defines roles
+
+1.Container Component
+    container component is component which receives data from data sources.
+
+2.Presentational component
+    Presentational component is component which receives data from the parent component
+ and display the data.
+
+import { render } from 'react-dom';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
+
+//component communication;unidirectional data flow; presentation and containers
+
+const CourseContainer = props => {
+    const { courses } = props;
+    return <div className="container">
+        <h1>Courses</h1>
+        {/** Child Component/Presentational Component */}
+        <CoursePresentation courses={courses} />
+    </div>
+}
+const CoursePresentation = props => {
+    return <>
+        <ul className="list-group list-group-flush">
+            {props.courses.map((course, index) =>
+                <li className="list-group-item" key={index}>{course}</li>)}
+        </ul>
+    </>
+};
+
+const courses = ['javascript', 'react', 'node', 'angular', 'reactnative'];
+
+const App = () => <>
+    <CourseContainer courses={courses} />
+</>
+
+render(<App />, document.getElementById('root'));
+
+/////////////////////////////////////////////////////////////////////////////////////////
