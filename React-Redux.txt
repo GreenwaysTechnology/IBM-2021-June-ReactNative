@@ -1695,3 +1695,431 @@ const App = () => <>
 render(<App />, document.getElementById('root'));
 
 /////////////////////////////////////////////////////////////////////////////////////////
+
+Component compostion and Uni directional data flow:
+...................................................
+
+Component Communication;
+  how components are going to communicate each other.
+  during communication you can pass data.
+
+1.parent to child
+   via properties.    
+2.child to parent
+   
+3.siblings : across
+
+
+Flux : 
+ It is design pattern, pass data from one component to component uni directional way.
+ parent to child.
+
+Types of Components :
+
+ COmponents are classified into various category.
+
+Component responsiability:
+
+Component receives data from outside(api,other data sources),the same component is used
+to display data. => We should not do this.
+
+Break component defines roles
+
+1.Container Component
+    container component is component which receives data from data sources.
+
+2.Presentational component
+    Presentational component is component which receives data from the parent component
+ and display the data.
+
+import { render } from 'react-dom';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
+
+//component communication;unidirectional data flow; presentation and containers
+
+const CourseContainer = props => {
+    const { courses } = props;
+    return <div className="container">
+        <h1>Courses</h1>
+        {/** Child Component/Presentational Component */}
+        <CoursePresentation courses={courses} />
+    </div>
+}
+const CoursePresentation = props => {
+    return <>
+        <ul className="list-group list-group-flush">
+            {props.courses.map((course, index) =>
+                <li className="list-group-item" key={index}>{course}</li>)}
+        </ul>
+    </>
+};
+
+const courses = ['javascript', 'react', 'node', 'angular', 'reactnative'];
+
+const App = () => <>
+    <CourseContainer courses={courses} />
+</>
+
+render(<App />, document.getElementById('root'));
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+Spread Operator which simplifies property passing from parent to child
+
+  ... : Spread Operator (ES 7 feature) : merge operator
+  ... : Rest operator : (ES 6 feature) : passing args 
+
+
+Syntax:
+
+Old Style:
+<ProfileDisplay title={this.props.title} name={this.props.name} rating={this.props.rating} status={this.props.status} address={this.props.address} />
+
+With Spread Notation
+<ProfileDisplay {...this.props} />
+
+
+import { render } from 'react-dom';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
+
+//component communication;unidirectional data flow; presentation and containers
+
+const CourseContainer = props => {
+    // const { courses, author, duration } = props;
+    return <div className="container">
+        <h1>Courses</h1>
+        {/** Child Component/Presentational Component */}
+        {/* <CoursePresentation courses={courses} author={author} duration={duration} /> */}
+        {/** Using Spread operator to merge props and component specific props */}
+        <CoursePresentation {...props} authorlable={"Teacher"} durationlable="Duration" />
+
+    </div>
+}
+const CoursePresentation = props => {
+    return <>
+        <h2>{props.authorlable} : {props.author}  {props.durationlable} : {props.duration}</h2>
+        <ul className="list-group list-group-flush">
+            {props.courses.map((course, index) =>
+                <li className="list-group-item" key={index}>{course}</li>)}
+        </ul>
+    </>
+};
+
+const courses = ['javascript', 'react', 'node', 'angular', 'reactnative'];
+
+const App = () => <>
+    <CourseContainer courses={courses} author="Subramanian" duration="7 days" />
+</>
+
+render(<App />, document.getElementById('root'));
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Component as prop:
+.................
+
+import { render } from 'react-dom';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
+
+
+const Panel = props => <div>
+    {props.children}
+</div>
+
+const TextAdv = () => <h1>
+    Text adv....
+</h1>
+const ImageAdv = () => <h1>
+     ImageAdv
+</h1>
+const App = () => <Panel>
+    <TextAdv/>
+    <ImageAdv />
+</Panel>
+
+render(<App />, document.getElementById('root'));
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+state :
+
+state is another way of representing data inside component.
+
+Points:
+
+1.with respect to props, component never modifies data / component never mutates the data.
+  -Based on fp principle called "pure function".
+
+2.what if i want to change data /mutate data?
+ props never help us, then we need to new pattern , that is called state.
+
+state helps to modifiy data/ mutate data.
+
+ 
+Pure function:
+..............
+
+B.function which receives input, modifies the input, but dont modifity the original input
+  rather than, return new output==>immuablity.
+
+ function  display(input){
+         return input(immutable input)=>new input
+ }
+
+How to implement immutability?
+
+
+//how to write immutable logic.
+
+//this is not pure function; impure function
+// function updateProfile(profile,city) {
+//     //mutate the city;
+//     profile.city = city;
+//     return profile;
+// }
+
+// //pure version
+// function updateProfile(profile,city) {
+//      //return new profile object
+//     return  {
+//       id:profile.id,
+//       name:profile.name,
+//       city:city
+//     };
+// }
+
+// //pure version :code refactoring
+// function updateProfile(profile, city) {
+//     //return new profile object
+//     //return Object.assign({}, profile, { city: city })
+//     return Object.assign({}, profile, { city })
+// }
+//pure version :code refactoring using es 7 spread operator
+function updateProfile(profile, city) {
+    //return new profile object
+    //return Object.assign({}, profile, { city: city })
+    return { ...profile, city };
+}
+
+
+let profile = { id: 1, name: 'subramaian', city: 'chennai' };
+
+Object.freeze(profile);
+console.log(profile);
+let updatedProfile = updateProfile(profile, 'coimbatore');
+console.log(updatedProfile);
+
+Array immutability api;
+
+ array.concat
+ array.map
+ array.filter
+ array.reduce
+////////////////////////////////////////////////////////////////////////////////////////////
+
+How to introduce state? -  for immutable data representation
+
+- inside class component
+- inside function component not possible but possible through "React 16 hooks".
+
+
+
+How to change state?
+
+Ways :
+
+1.inital render : when page is loaded first
+2.through user/program interaction : event handling
+
+Event Handling:
+
+Button==>event====>Listener(callback)
+
+4.1.How to bind event
+ <button onclick="listner">text</button> -js
+
+React event binding:you are writing jsx : jsx event binding.
+
+jsx and attribute binding: camelCase
+event handler is function/method of class.
+
+
+ <button className="btn btn-success" onClick={this.increment} >+</button> -external event listner
+ <button className="btn btn-success" onClick={()=>{}} >+</button> -inline event listener
+
+
+write biz logic to mutate the state variable called counter?
+
+
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+
+
+class Counter extends Component {
+    //application state(data)
+    state = {
+        counter: 0
+    };
+    //listener method
+    onIncrement = evt => {
+        //mutate the state, react uses pure function ;setState
+        // this.setState((previousState) => {
+        //     return {
+        //         counter: previousState.counter + 1
+        //     }
+        // })
+        // this.setState(previousState => {
+        //     let counter = previousState.counter + 1;
+        //     return {
+        //        // counter: counter
+        //        counter
+        //     }
+        // });
+        let counter = this.state.counter + 1;
+        this.setState({ counter });
+    }
+
+    render() {
+        console.log(this.props)
+        console.log(this.state)
+        return <div>
+            <h1>Counter : {this.state.counter}</h1>
+            <button onClick={this.onIncrement}>+</button>
+        </div>
+    }
+}
+
+const App = () => <>
+    <Counter />
+</>;
+render(<App />, document.getElementById('root'));
+////////////////////////////////////////////////////////////////////////////////////////////
+Hooks:
+
+What is hook?
+Hook is a special function that lets y "hooks into" react features.
+
+objective of hooks:
+
+1.to eleminate class components as much possible.
+
+2.Resuable application behaviours
+  eg:ajax calls
+
+
+1.if i am going to remove class means, how can i handle state inside function components.
+  useState hook
+
+"use"+functionName ==>hook Syntax
+"useState"
+"useContext"
+"useEffect"
+"useAjax"
+"useWebSocket"
+etc....
+
+
+import React, { Component, useState } from 'react';
+import { render } from 'react-dom';
+
+
+// class Counter extends Component {
+//     //application state(data)
+//     state = {
+//         counter: 0
+//     };
+//     //listener method
+//     onIncrement = evt => {
+//         let counter = this.state.counter + 1;
+//         this.setState({ counter });
+//     }
+
+//     render() {
+//         console.log(this.props)
+//         console.log(this.state)
+//         return <div>
+//             <h1>Counter : {this.state.counter}</h1>
+//             <button onClick={this.onIncrement}>+</button>
+//         </div>
+//     }
+// }
+
+const Counter = props => {
+    const [counter, setCounter] = useState(0)
+    //function
+    function onIncrement() {
+        setCounter(counter + 1);
+    }
+    return <div>
+        <h1>Counter {counter}</h1>
+        <button onClick={onIncrement} >+</button>
+        <button onClick={() => setCounter(counter - 1)} >-</button>
+
+    </div>
+}
+
+const App = () => <>
+    <Counter />
+</>;
+render(<App />, document.getElementById('root'));
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Presentational COmponent and COntainer Component :
+
+Container component will have state, presentational component will have only data.
+
+state + props - dynamic props, state as prop.
+function as prop
+
+import React, { Component, useState } from 'react';
+import { render } from 'react-dom';
+
+
+// class Counter extends Component {
+//     //application state(data)
+//     state = {
+//         counter: 0
+//     };
+//     //listener method
+//     onIncrement = evt => {
+//         let counter = this.state.counter + 1;
+//         this.setState({ counter });
+//     }
+
+//     render() {
+//         console.log(this.props)
+//         console.log(this.state)
+//         return <div>
+//             <h1>Counter : {this.state.counter}</h1>
+//             <button onClick={this.onIncrement}>+</button>
+//         </div>
+//     }
+// }
+
+const Counter = props => {
+    const [counter, setCounter] = useState(0)
+    //function
+    function onIncrement() {
+        setCounter(counter + 1);
+    }
+    function onDecrement() {
+        setCounter(counter - 1);
+    }
+    return <div>
+        <CounterDisplay counter={counter}  onDecrement={onDecrement}  onIncrement={onIncrement} />
+        {/* <button onClick={() => setCounter(counter - 1)} >-</button> */}
+    </div>
+}
+const CounterDisplay = props => <>
+    <h1>Counter {props.counter}</h1>
+    <button onClick={props.onIncrement} >+</button>
+    <button onClick={props.onDecrement} >-</button>
+
+</>
+
+const App = () => <>
+    <Counter />
+</>;
+render(<App />, document.getElementById('root'));

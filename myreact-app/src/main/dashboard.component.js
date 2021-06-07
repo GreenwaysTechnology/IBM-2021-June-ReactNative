@@ -1,6 +1,6 @@
 import { Address } from "./address.component";
 import { Skills } from "./skills.component";
-
+import PropTypes from 'prop-types'
 
 export const DashBoard = (props) => {
   console.log(props)
@@ -41,4 +41,10 @@ DashBoard.defaultProps = {
     state: 'state'
   },
   skills: []
+}
+
+//Validation
+DashBoard.propTypes = {
+  //validation rule
+  age: PropTypes.number.isRequired
 }
