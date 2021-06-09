@@ -1,4 +1,4 @@
-                                           React Native
+                                            React Native
 ..............................................................................................
 
 What is React Native?
@@ -300,4 +300,294 @@ import App from './App';
 import {name as appName} from './app.json';
 
 AppRegistry.registerComponent(appName, () => App);
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+React Native Application Architecture:
+......................................
+
+React Native apps are collection of components(From react native core,third party components,expo components).
+
+Basic template :
+
+import React from 'react'
+
+Components:
+...........
+
+1.Text --- <p>
+
+import React from 'react';
+import {Text} from 'react-native';
+
+
+export default function App(){
+    return <Text>Hello!</Text>
+}
+
+2.View 
+
+ The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls. 
+View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+
+export default function App() {
+    return <View>
+            <Text>Hello View!</Text>
+    </View>
+}
+
+Any thing will be rendered from left most corner, how to align.
+
+Styles:
+.......
+
+In react Styles are added through css, react native does not support css because no html is used.
+
+React Native does not allow css directly. Java script has api to add styles via code.
+
+eg.
+in html
+
+document.getElementById('myid').styles.add.backgroundColor='red'
+
+React Native uses javascript api to add styles to any UI Element.
+
+Style is Object, which contains properties
+
+ element.style.property
+
+StyleSheet
+   A StyleSheet is an abstraction similar to CSS StyleSheets
+
+StyleSheet object has method called "create" mehtod
+
+
+StyleSheet.create({
+ styleProperty: propvalue,
+ styleProprety:{
+    styleProp:propValue
+ }
+});
+
+Refer :https://www.w3schools.com/jsref/prop_style_color.asp
+
+
+eg:
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea"
+    },
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    }
+});
+
+export default function App() {
+    return <View style={container}>
+        <Text style={text}>Hello View!</Text>
+        {/**in line style */}
+        <Text style={{
+            color: "red",
+            textAlign: "center",
+            fontSize: 30
+        }}>Hello View!</Text>
+
+    </View>
+}
+
+// export default function App() {
+//     return <View style={appStyles.container}>
+//         <Text style={appStyles.text}>Hello View!</Text>
+//         {/**in line style */}
+//         <Text style={{
+//             color: "red",
+//             textAlign: "center",
+//             fontSize: 30
+//         }}>Hello View!</Text>
+
+//     </View>
+// }
+// const appStyles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         padding: 24,
+//         backgroundColor: "#eaeaea"
+//     },
+//     text: {
+//         color: "#20232a",
+//         textAlign: "center",
+//         fontSize: 30
+//     }
+// });
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Data binding : props
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea"
+    },
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    }
+});
+
+const Greeting = props => <>
+    <Text style={text}>{props.message}</Text>
+</>
+
+const App = () => {
+    return <View style={container}>
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+    </View>
+}
+export default App;
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+How to modularize the components?
+
+components/greeting.jsx
+
+import React from 'react';
+import { Text, StyleSheet } from 'react-native';
+
+export const { text } = StyleSheet.create({
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    }
+});
+
+export const Greeting = props => <>
+    <Text style={text}>{props.message}</Text>
+</>
+
+App.js
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Greeting } from './components/greeting';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea"
+    },
+});
+
+const App = () => {
+    return <View style={container}>
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+    </View>
+}
+export default App;
+////////////////////////////////////////////////////////////////////////////////////////////
+Properties for Built in React Native Components
+...............................................
+
+export const Greeting = props => <>
+    <Text onPress={() => alert('pressed')} style={text}>{props.message}</Text>
+</>
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+State:
+
+1.class Component
+2.using functions with hooks
+
+
+Using Component:
+
+import React, { Component } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+export default class App extends Component {
+    state = {
+        counter: 1
+    };
+    //listener function
+    onIncrement = () => {
+        //alert('button is clicked')
+        this.setState((state) => {
+            return {
+                counter: state.counter + 1
+            }
+        })
+    }
+    render() {
+        return <View style={container}>
+            <Text style={text}>Counter {this.state.counter}</Text>
+            <Button title="Increment" onPress={this.onIncrement} />
+        </View>
+    }
+}
+
+Using Hooks:
+............
+import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+const App = () => {
+    const [counter, setCounter] = useState(1);
+    const onIncrement = () => {
+        setCounter(counter + 1);    }
+    return <View style={container}>
+        {/**state as prop */}
+        <CounterDisplay counter={counter} onIncrement={onIncrement} />
+    </View>
+}
+//presentational component
+export const CounterDisplay=({counter,onIncrement})=>{
+    return <>
+         <Text style={text}>Counter {counter}</Text>
+         <Button title="Increment" onPress={onIncrement} color="green"/>
+      </>
+}
+
+export default App;
 /////////////////////////////////////////////////////////////////////////////////////////////
