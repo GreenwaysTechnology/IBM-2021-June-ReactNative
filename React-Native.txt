@@ -1003,3 +1003,493 @@ const styles = {
 
 export default App;
 //////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Array of Elements:
+.................
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Users } from './mock-data/users';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'pink',
+        flexDirection:'column',
+        padding:50
+    }
+})
+
+const App = () => {
+    return <View style={styles.container}>
+        {
+            Users.map((user, index) => {
+                return <View style={{padding:30}} key={index}>
+                    <Text>{user.name}</Text>
+                </View>
+            })
+        }
+    </View>
+}
+export default App;
+
+if you look the result in this app, all elements are not displayed, we need to scrollbar.
+
+ScrollView:
+...........
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Users } from './mock-data/users';
+import Constants from 'expo-constants';
+
+// const styles = StyleSheet.create({
+
+//     container: {
+//         flex: 1,
+//         backgroundColor: 'pink',
+//         flexDirection: 'column',
+//     },
+//     scrollView: {
+//         backgroundColor: 'yellow',
+//         marginHorizontal: 20,
+//     }
+// })
+
+// const App = () => {
+//     return <View style={styles.container}>
+//         {
+//             Users.map((user, index) => {
+//                 return <ScrollView style={styles.scrollView} key={index}>
+//                     <Text>{user.name}</Text>
+//                 </ScrollView>
+//             })
+//         }
+//     </View>
+// }
+// export default App;
+
+export default function App() {
+    return (
+        <View style={styles.container}>
+            <ScrollView style={styles.scrollView}>
+                <Text style={styles.text}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                    est laborum.
+                </Text>
+                {
+                    Users.map((user, index) => {
+                        return <Text>{user.name}</Text>
+                    })
+                }
+            </ScrollView>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: Constants.statusBarHeight,
+    },
+    scrollView: {
+        backgroundColor: 'pink',
+        marginHorizontal: 20,
+    },
+    text: {
+        fontSize: 42,
+    },
+});
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+FlatList: 
+
+To render list along with scrollbar.
+
+<ScrollView> vs <FlatList> - which one to use?
+
+ScrollView renders all its react child components at once, but this has a performance downside.
+
+Imagine you have a very long list of items you want to display, maybe several screens worth of content. Creating JS components and native views for everything all at once, much of which may not even be shown, will contribute to slow rendering and increased memory usage.
+
+This is where FlatList comes into play. FlatList renders items lazily, when they are about to appear, and removes items that scroll way off screen to save memory and processing time.
+
+FlatList is also handy if you want to render separators between your items, multiple columns, infinite scroll loading, or any number of other features it supports out of the box.
+
+Fully cross-platform.
+Optional horizontal mode.
+Configurable viewability callbacks.
+Header support.
+Footer support.
+Separator support.
+Pull to Refresh.
+Scroll loading.
+ScrollToIndex support.
+Multiple column support.
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Users } from './mock-data/users';
+import Constants from 'expo-constants';
+
+const App = () => {
+    const [users, setUsers] = useState(Users);
+
+    return <View styles={styles.container}>
+        <FlatList 
+         keyExtractor={(item)=>item.id} 
+         data={users}
+         renderItem={({item}) => (
+            <Text style={styles.item}>{item.name}</Text>
+        )} />
+    </View>
+}
+
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 40,
+        paddingHorizontal: 20,
+        backgroundColor: '#fff'
+    },
+    item: {
+        flex: 1,
+        marginHorizontal: 10,
+        marginTop: 25,
+        padding: 30,
+        backgroundColor: 'pink',
+        fontSize: 24
+    }
+})
+////////////////////////////////////////////////////////////////////////////////////////////
+Properties:
+
+data - bind a data source to list.
+renderItem is a function takes arg- item object,index,separator object
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+SectionList Component:
+.....................
+
+Based On Section:
+
+A 
+ Arun
+ Arjun
+B
+ Bala
+ Babu
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, StatusBar, SectionList } from 'react-native';
+import { DISHES } from './mock-data/dishes'
+
+const Item = ({ title }) => (
+    <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+    </View>
+);
+const App = () => {
+    return <SectionList
+        sections={DISHES}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({ item }) => <Item title={item} />}
+        renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.header}>{title}</Text>
+        )}
+    />
+};
+
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
+        marginHorizontal: 16
+    },
+    item: {
+        backgroundColor: "#f9c2ff",
+        padding: 20,
+        marginVertical: 8
+    },
+    header: {
+        fontSize: 32,
+        backgroundColor: "#fff"
+    },
+    title: {
+        fontSize: 24
+    }
+});
+///////////////////////////////////////////////////////////////////////////////////////////
+
+Images:
+.......
+
+Loading Images locally:
+......................
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import icon from './assets/icon.png'
+
+
+const App = () => {
+    return <View style={styles.container}>
+        <Image source={icon} style={styles.image}></Image>
+        <Text style={{ color: '#888', fontSize: 18 }}>To share a photo from Your Phone Just Press Button below!</Text>
+    </View>
+}
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image: {
+        width: 305,
+        height: 159
+    }
+})
+
+Load images from network:
+........................
+
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import icon from './assets/icon.png'
+
+
+const App = () => {
+    const imageUri = "https://i.imgur.com/TkIrScD.png";
+    return <View style={styles.container}>
+        <Image source={{ uri: imageUri }} style={styles.image}></Image>
+
+        <Text style={{ color: '#888', fontSize: 18 }}>To share a photo from Your Phone Just Press Button below!</Text>
+    </View>
+}
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image: {
+        width: 305,
+        height: 159
+    }
+})
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Handling Touch Features in Mobile:
+...................................
+Users interact with mobile apps mainly through touch. They can use a combination of gestures, such as tapping on a button, scrolling a list, or zooming on a map. React Native provides components to handle all sorts of common gestures, as well as a comprehensive gesture responder system to allow for more advanced gesture recognition, but the one component you will most likely be interested in is the basic Button.
+
+
+Touchable Components:
+.....................
+
+If the basic button doesn't look right for your app, you can build your own button using any of the "Touchable" components provided by React Native. The "Touchable" components provide the capability to capture tapping gestures, and can display feedback when a gesture is recognized. These components do not provide any default styling,
+
+1.TouchableHighLight && TouchableOpacity
+....................
+import React, { useState } from 'react';
+import {
+    Platform,
+    PlatformColor,
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    TouchableOpacity,
+    View
+} from 'react-native';
+
+export const { container, text, button } = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "lightgray",
+        padding: 10
+    }
+
+});
+
+const App = () => {
+    const [count, setCount] = useState(0);
+    const onIncrement = () => setCount(count + 1);
+    return <View style={container}>
+        <TouchableHighlight onPress={onIncrement} activeOpacity={0.6}
+            underlayColor="#DDDDDD">
+            <View style={button}>
+                <Text>Touch Me!</Text>
+            </View>
+        </TouchableHighlight>
+        <TouchableOpacity>
+            <View style={button}>
+                <Text>Touch Me!</Text>
+            </View>
+        </TouchableOpacity>
+    </View>
+}
+
+export default App;
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+                                      Networking
+////////////////////////////////////////////////////////////////////////////////////////////
+
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
+
+class ChildOne extends React.Component {
+  constructor() {
+    super();
+    console.log('Child One is called')
+  }
+  componentDidMount() {
+    console.log('Child one Ui is rendered')
+  }
+  render() {
+    console.log('Child one render is called')
+    return <View>
+      <Text>Child One</Text>
+      <ChildTwo></ChildTwo>
+    </View>
+  }
+}
+class ChildTwo extends React.Component {
+  constructor() {
+    super();
+    console.log('Child Two is called')
+  }
+  componentDidMount() {
+    console.log('Child Two Ui is rendered')
+  }
+  render() {
+    console.log('Child Two render is called')
+    return <View>
+      <Text>Child Two</Text>
+    </View>
+  }
+}
+
+export default class App extends React.Component {
+  //add constructor
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null, // if any ajax error
+      isLoaded: false, //Progress bar enabler
+      items: []  // data to be filed
+    };
+    console.log('Parent constructor is called')
+  }
+  componentDidMount() {
+    console.log('Parent Ui is rendered')
+    //api code.
+    const url = "https://jsonplaceholder.typicode.com/todos"
+    fetch(url)
+      .then(res => res.json())
+      .then((result) => {
+        this.setState({
+          isLoaded: true,
+          items: result
+        });
+      },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
+  }
+  static getDerivedStateFromProps(props, state) {
+    //  console.log(`Current State ${JSON.stringify(state)} Current Prop ${JSON.stringify(prop)}`)
+
+  }
+  componentDidUpdate() {
+    console.log('Ui is updated')
+  }
+
+
+  render() {
+    const { error, isLoaded, items } = this.state;
+    console.log('Parent  render is called')
+    if (error) {
+      return <View style={styles.error}> Error: {error.message}</View>;
+    } else if (!isLoaded) {
+      return <View style={styles.loader}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>;
+    } else {
+      return (<View styles={styles.container}>
+        <FlatList
+          keyExtractor={(item) => item.id + ""}
+          data={items}
+          renderItem={({ item }) => {
+            //  console.log(item);
+            return <Text style={styles.item}>{item.title}</Text>
+          }} />
+      </View>);
+    }
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  error: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loader: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    flex: 1,
+    marginHorizontal: 10,
+    marginTop: 25,
+    padding: 30,
+    backgroundColor: 'pink',
+    fontSize: 24
+  }
+});
