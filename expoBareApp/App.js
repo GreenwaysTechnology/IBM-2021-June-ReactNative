@@ -1,67 +1,50 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
+import { createStore } from 'redux'
 
-
-class App extends React.Component {
-    // state = {
-    //     value: '....',
-    //     counter: 0
-    // }
-    state = {
-        todos: []
+//reducer
+function CommentsReducer(comment = { like: 0, dislike: 10 }, action) {
+    switch (action.type) {
+        case 'LIKE':
+            //Write like logic: must be immutable
+            return Object.assign({}, comment, { like: comment.like + 1 })
+        case 'DISLIKE':
+            //Write dislike logic
+            return Object.assign({}, comment, { dislike: comment.dislike + 1 })
+        default:
+            //default value
+            return comment;
     }
-    constructor() {
-        super()
-        console.log('constructors are called')
-    }
+}
+//create store object
+const store = createStore(CommentsReducer)
 
-    render() {
-        const { todos } = this.state;
-        console.log('render is called')
-        return <View style={styles.container}>
-            {/* <Text style={{ fontSize: 50 }}>{this.state.value}</Text>
-            <Text style={{ fontSize: 50 }}>{this.state.counter}</Text> */}
-            <Text style={{ fontSize: 50 }}>Todos</Text>
-            <FlatList
-                keyExtractor={(item) => item.id}
-                data={todos}
-                renderItem={({ item }) => (
-                    <Text style={styles.item}>{item.title}</Text>
-                )} />
-        </View>
-    }
+//subscribe for new state
+store.subscribe(function () {
+    console.log(store.getState())
+})
+//send request
+const likeaction = {
+    type: 'LIKE'
+}
+const dislikeaction = {
+    type: 'DISLIKE'
+}
+store.dispatch(likeaction)
+store.dispatch(likeaction)
+store.dispatch(likeaction)
+store.dispatch(dislikeaction)
+store.dispatch(dislikeaction)
+store.dispatch(dislikeaction)
 
-    delay() {
-        setTimeout(() => {
-            this.setState((oldstate) => {
-                return Object.assign({}, oldstate, { value: 'Welcome' })
-            })
-        }, 10000)
 
-        setInterval(() => {
-            this.setState((oldstate) => {
-                return Object.assign({}, oldstate, { counter: oldstate.counter + 1 })
-            })
-        }, 1000)
-    }
-    componentDidMount() {
-        console.log('Componented is mounted')
-        //this.delay()
-        const url = 'https://jsonplaceholder.typicode.com/todos'
-        fetch(url)
-            .then(response => {
-                return response.json()
-            }).then(todos => {
-                console.log(todos)
-                this.setState(oldstate => {
-                    return Object.assign({}, oldstate, { todos })
-                })
-            })
-            .catch(errs => {
-                console.log(errs)
-            })
-    }
 
+
+const App = () => {
+
+    return <View style={styles.container}>
+        <Text>Redux</Text>
+    </View>
 }
 const styles = StyleSheet.create({
     container: {

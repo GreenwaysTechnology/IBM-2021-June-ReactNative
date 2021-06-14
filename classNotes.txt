@@ -1,0 +1,448 @@
+
+salary=1000
+
+salary ="sdfkadfjl"
+
+<Employee salary={"asdfafd"} />
+
+Property constraints or property validation.
+
+salary should be number. ->waring
+
+
+class Component {
+  props
+  state
+  render(){}
+  ...
+  setState(){}
+  forceUpdate() {}
+  //static variables
+  defaultProps
+  displayName
+  propTypes
+
+}
+
+class MyComponent extends Component {
+  render(){}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Props is pattern through which you can send data to component from other components.
+Props are used to display data.
+
+
+state is patter through which you can modifiy the data, through which you re render the view.
+
+-to change data 
+how to change data - via event handling.
+
+state is available inside class component only in general. 
+
+
+function   compute(x){
+
+   return x;
+}
+
+compute(10);
+
+Rules:
+
+1.function take input ,never modifies that input and return the same  - pure fun
+
+
+function  TitleComponent(props){
+
+    return <h1>{props.title}</h1>
+}
+
+<TitleComponet title="Ibm"/>
+
+
+2. what if function wants to change data, how to write pure function?
+
+
+function  updateProfile(city,profile){
+
+   return    //return updated profile
+}
+
+updater,callback
+setState(fun,fun){
+
+}
+updater function has two args
+
+pure function
+(oldstate,props)=>newState
+
+hooks:
+
+state + props
+
+parent component - state logic - only state no ui - container components
+
+child component -only ui - presentational component
+
+
+
+
+Scroll View
+Image
+List View
+
+Types of views:
+
+1.View
+2.ScrollView
+2.ListView
+
+ListView
+ -FlatList
+ -SectionList
+
+FlatList
+
+ -FlatList component displays a scrolling list of changing but structured data(array of datas)
+ -FlatList is good for lists of data.
+
+ScrollView vs FlatList
+
+ -Scrollview will load all the data once. this is going to impact performance.
+ FlatList only renders elements that are currently showing on the screen, not elements at once.
+
+FlatList Properties
+ data - datasource
+ renderItem - function which takes items one time at time.
+
+ 
+TouchableViews:Gestures responding
+
+
+TouchHighlight -highlight behaviour
+TouchableNativeFeedBack -platform touch behaviour
+TouchableOpacity - opacity behaviour
+TouchableWithoutFeedBack -without any visual feedback- like no highlight
+
+<TouchableHighlight>
+    <Text>
+    <Image>
+    <Button>   
+</TouchableHighlight>
+
+
+               <TouchableHighlight
+                    key={item.key}
+                    onPress={() => onPressItem(item)}
+                    onShowUnderlay={separators.highlight}
+                    onHideUnderlay={separators.unhighlight}>
+                    <View style={styles.item}>
+                        <Text>{item.title}</Text>
+                    </View>
+                </TouchableHighlight>
+
+
+<TouchableHighlight
+  activeOpacity={0.6}
+  underlayColor="#DDDDDD"
+  onPress={() => alert('Pressed!')}>
+  <MyComponent />
+</TouchableHighlight>;
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+How to connect web end points
+
+native : java apis.
+
+React Native :
+ any ajax libs
+-jquery
+-thrid party libs
+-fetch()
+
+Two phases of every ui app
+
+1.inital render
+    - inside component - you need some logic 
+
+2.user interaction
+
+
+
+Component life cycles.  : can be added only in Class components in General
+
+React 16 onwards you can add component life cycles methods in side functions via "hooks".
+
+Phases:
+
+1.Mount -  inital
+   constructor() - for initalization object
+   static getDerivedStateFromProps() - for inspecting props
+   render()  - for preparing object tree
+   componentDidMount()	---- once ui is rendered
+   
+componentDidMount()
+  -for initalization resource intensive tasks
+    -inital webservice calls
+    -timers
+    -websockets
+
+WebService Interaction:
+
+you may get data or you get may get error
+
+if i have data how to display
+
+if i have errors how to display - how to handle error.
+
+you server may slow to send data.
+
+
+
+2.Update - user interact
+
+3.UnMount - when cmp is removed
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+fetch logic inside async and await
+
+
+functional component  + life cycle hooks + ajax calls(fetch calls)
+...................................................................
+
+features:
+
+ - if data is ready how to show data
+ - if data is not ready-dealy - progressbar.  -ActivityIndicator
+ - how to handle errors
+
+useEffect
+
+ - to replace componentDidMount and componentDidUpdate
+
+
+fetch: Handling exceptions- server exceptions smoothly.
+
+two ways of handling exceptions
+
+Way -1 handling errors inside catch block
+
+ fetch(url)
+   .then(data)
+   .catch(error)
+ 
+recommendations: catch can be used to log errors in the console, but not good for ui.
+
+way-2:
+
+  fetch(url)
+     .then(fn1,fn2)
+     
+fn1 - function used to handle success data
+fn2 - function used to handle error  data
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Redux: State Management:
+........................
+
+React / React Native : USER INTERFACE LIb to build user interfaces.
+
+User interface is collection of ui elements.
+
+ui elements in web composed of html elements
+
+ui elements in mobile composed of mobile native elements.
+
+ui elements are composed as component.
+
+Component represens a single ui element or collection of ui elements.
+
+Component can have 
+
+ - UI MARKUP -  <VIEW> TEXT,TEXTINPUT,....
+ - data -  is encapsulated inside component called state, and supplied from outside called            props
+ -methods - listeners
+     responsible for component state changes
+     responsible for mutation data.
+
+
+Refactoring:
+
+  we have seen already that data and methods can be kept in one component called 
+"container component"
+ 
+ Component is having only ui , just receives data from the other component called parent 
+ "Presentational Component".
+
+Types of Data in UI:
+
+1.BIZ DATA / Domain data /models
+  eg : user,product,employee,items,invoice......
+
+2.Ui data / UI STATE
+  
+eg: Switch Component
+ 
+ on /off  -  data having boolean value  -  true/false
+
+ on - true
+ off -false
+
+ isLoading - Data used inside ActivityIndicator -  progress bars
+
+ enable and disabled
+
+ show and hide
+
+
+Rules of Thumb:
+
+ move all biz data out of components, keep ui state inside component
+
+Out of components means into a separate layer called state layer.
+
+State layer or state Management layer:
+  where we can store all application state , and we can mutate the state there.
+
+Redux:A Predictable State Container for JS Apps
+
+Redux is engine where we can store the whole app state.
+
+Two layers of any app
+
+ application code  + storage(databases).
+
+Redux is similar to storage tech.
+
+Redux stores/maintains a small database - State container.
+
+Redux stores the whole app data = state.
+
+Whole App Data:
+
+App features
+
+1.customers
+2.products
+3.inventory
+etc...
+
+each feature has its own  data
+
+let customers = [{
+  id:1,
+  name:'a'
+}]
+ 
+let products = [{
+  id:1,
+  name:'a'
+}]
+ 
+incase of back end apps;
+
+data base:
+
+ -mykart - database -schema
+      -tables
+   customers,products
+
+Redux storage arch:
+
+1. redux stores the data inside one single literal object
+
+ eg;
+
+ const appState = {
+
+
+ }
+
+2.redux separate the data  based features
+
+ const appState = {
+    products: []
+    customers: []
+ }
+
+3. redux uses pure function to track state mutations
+
+ when ever new state changed, it copies the whole state , gives new state 
+
+1.
+ const appState = {
+    products: []
+    customers: []
+ }
+update
+2. const appState = {
+    products: []
+    customers: []
+ }
+
+3.
+ const appState = {
+    products: []
+    customers: []
+ }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Redux core concepts:
+
+1.store
+ Object -The place where we store data .
+
+class Store {  
+  
+   getState() -method - to retrive Application State.
+   dispatch(action)
+   subscribe()
+
+}
+let store = new Store();
+ 
+store.getState() ===> {f1:..,f2:...,f3:...} 
+
+
+2.reducer 
+
+ -function
+ -having biz logic
+ -pure function - should return immutable datastructure
+
+
+3.action 
+  -as layman point of view -  request
+  -it is object describing what to do on redux - request payload 
+   eg; in http world
+    GET - /URI  ---- Ask the server to call get method .
+
+  {type:'whattodo'}
+
+4.dispatcher
+    is function takes action object(request) and send it to store.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
