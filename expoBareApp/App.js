@@ -1,50 +1,66 @@
-import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
-import { createStore } from 'redux'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { createStore, combineReducers } from 'redux'
+import { connect, Provider } from 'react-redux'
 
-//reducer
-function CommentsReducer(comment = { like: 0, dislike: 10 }, action) {
+//how to pass input to the reducer.
+// action object has another property {type:'INPUT',payload:'inputvalue'}
+const InputReducer = (state = { text: 'foo' }, action) => {
     switch (action.type) {
-        case 'LIKE':
-            //Write like logic: must be immutable
-            return Object.assign({}, comment, { like: comment.like + 1 })
-        case 'DISLIKE':
-            //Write dislike logic
-            return Object.assign({}, comment, { dislike: comment.dislike + 1 })
+        case 'INPUT':
+            return Object.assign({}, state, { text: action.payload })
+
         default:
-            //default value
-            return comment;
+            return state;
+    }
+};
+const rootReducer = combineReducers({
+    InputReducer
+})
+const store = createStore(rootReducer);
+
+const mapStateToProp = appState => {
+    console.log(appState.InputReducer)
+    return {
+        text: appState.InputReducer.text
     }
 }
-//create store object
-const store = createStore(CommentsReducer)
 
-//subscribe for new state
-store.subscribe(function () {
-    console.log(store.getState())
-})
-//send request
-const likeaction = {
-    type: 'LIKE'
+//action creator
+function sendAction(input) {
+    return {
+        type: 'INPUT',
+        payload: input
+    }
 }
-const dislikeaction = {
-    type: 'DISLIKE'
-}
-store.dispatch(likeaction)
-store.dispatch(likeaction)
-store.dispatch(likeaction)
-store.dispatch(dislikeaction)
-store.dispatch(dislikeaction)
-store.dispatch(dislikeaction)
 
+const InputComponent = props => {
+    const [text, setText] = useState('defaultText')
+
+    const onSend = () => {
+        props.dispatch(sendAction(text));
+        setText('')
+    }
+    return <View style={styles.container}>
+        <Text style={{ fontSize: 25 }}>Hello {props.text}</Text>
+        <TextInput
+            style={{ height: 40, backgroundColor: 'yellow' }}
+            placeholder="Type Text Here..."
+            value={text}
+            onChangeText={text => setText(text)}
+        />
+        <Button onPress={onSend} title="Send Input" />
+    </View>
+}
+const InputContainer = connect(mapStateToProp)(InputComponent);
 
 
 
 const App = () => {
+    return <Provider store={store}>
+        <InputContainer />
+    </Provider>
 
-    return <View style={styles.container}>
-        <Text>Redux</Text>
-    </View>
 }
 const styles = StyleSheet.create({
     container: {
@@ -52,15 +68,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    item: {
-        flex: 1,
-        marginHorizontal: 10,
-        marginTop: 25,
-        padding: 30,
-        backgroundColor: 'pink',
-        fontSize: 24
     }
 });
 
 export default App;
+
+

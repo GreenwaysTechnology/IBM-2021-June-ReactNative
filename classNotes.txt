@@ -427,17 +427,60 @@ store.getState() ===> {f1:..,f2:...,f3:...}
 4.dispatcher
     is function takes action object(request) and send it to store.
  
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+React Native integration with Redux:
+....................................
+
+react-redux lib must be installed
+
+npm i react-redux --save
 
 
 
+Root Component must be wrapped inside another component called
 
+<Provider store={appStore}>
+    <Your Root Component>
+</Provider>
 
+two reducer,two mapper,two containers but store one
 
+based on domain we can create constants
 
+-increment domain
+-decrement domain
 
+const appState =  {
 
+  incrementRedcuer: {},
+  decrementReducer: {},
+  productsReducer :{},
 
+}
 
+getState() => will return whole state
+
+Mapper function
+
+//is used to filter reducer state.
+function mapStateToProp(appState){
+  const state = appState.incrementReducer.state
+  return {
+     inc: appState.incrementReducer.state
+
+  }
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+
+How to pass input to the redux, based on input how to return data.
+
+action creator;
+  it is function which takes input from ui and send to redux.
+
+function should return action object
 
 
 

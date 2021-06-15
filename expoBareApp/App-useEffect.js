@@ -10,7 +10,7 @@ const App = () => {
     //or
     //const [responses,setResponse] = useState({todos:[],error:null,isLoading:true})
 
-    //Life cycle hooks: componentDidMount
+    //Life cycle hooks: componentDidMount /ComponentDidUpdate
     // useEffect(() => {
     //     // resource initalization
     //     setTimeout(() => {
@@ -19,7 +19,7 @@ const App = () => {
     //     return () => {
     //         //for clean up resources
     //     }
-    // }, [])
+    // }, [props.something])
     //fetch logic inside useEffect
 
     // useEffect(() => {
@@ -73,6 +73,7 @@ const App = () => {
         //async and await
         //init funciton
         init();
+        //unMountPhase :componentWillUnMount
         return () => {
 
         }
