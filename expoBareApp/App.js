@@ -1,76 +1,67 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import { createStore, combineReducers } from 'redux'
-import { connect, Provider } from 'react-redux'
+import React from 'react';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack'
 
-//how to pass input to the reducer.
-// action object has another property {type:'INPUT',payload:'inputvalue'}
-const InputReducer = (state = { text: 'foo' }, action) => {
-    switch (action.type) {
-        case 'INPUT':
-            return Object.assign({}, state, { text: action.payload })
+//create StacKNavigator object
+// const Stack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator()
 
-        default:
-            return state;
-    }
-};
-const rootReducer = combineReducers({
-    InputReducer
-})
-const store = createStore(rootReducer);
-
-const mapStateToProp = appState => {
-    console.log(appState.InputReducer)
-    return {
-        text: appState.InputReducer.text
-    }
-}
-
-//action creator
-function sendAction(input) {
-    return {
-        type: 'INPUT',
-        payload: input
-    }
-}
-
-const InputComponent = props => {
-    const [text, setText] = useState('defaultText')
-
-    const onSend = () => {
-        props.dispatch(sendAction(text));
-        setText('')
-    }
+//Home screen Component
+const Home = props => {
+    console.log(props)
     return <View style={styles.container}>
-        <Text style={{ fontSize: 25 }}>Hello {props.text}</Text>
-        <TextInput
-            style={{ height: 40, backgroundColor: 'yellow' }}
-            placeholder="Type Text Here..."
-            value={text}
-            onChangeText={text => setText(text)}
-        />
-        <Button onPress={onSend} title="Send Input" />
+        <Text>Home Screen</Text>
+        <Button title="Go to Details" onPress={() => props.navigation.navigate('Details')} />
+
     </View>
 }
-const InputContainer = connect(mapStateToProp)(InputComponent);
+const DetailsScreen = props => {
+    const { route } = props
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen</Text>
+            <Text>Details Screen : {route.params.id} - {route.params.item}</Text>
 
-
-
-const App = () => {
-    return <Provider store={store}>
-        <InputContainer />
-    </Provider>
-
+            <Button
+                title="Go to Details... again"
+                onPress={() =>
+                    // props.navigation.push('Details', {
+                    //     id: Math.floor(Math.random() * 100),
+                    // })}
+                    props.navigation.setParams({ id: 900, item: 'foo' })
+                }
+            />
+            <Button title="Go to Home" onPress={() => props.navigation.navigate('Home')} />
+            <Button title="Go back" onPress={() => props.navigation.goBack()} />
+        </View>
+    );
 }
+
+//Navigation rules
+
+// const App = () => <NavigationContainer>
+//     <Stack.Navigator>
+//         <Stack.Screen name="Home" component={Home} />
+//     </Stack.Navigator>
+// </NavigationContainer>
+
+const App = () => <NavigationContainer >
+    <Navigator initialRouteName="Home">
+        <Screen name="Home" component={Home} options={{ title: 'Welcome to Start Token' }}>
+
+        </Screen>
+        <Screen name="Details"  component={DetailsScreen} initialParams={{ id: 1, item: 'React Native v2' }} />
+    </Navigator>
+</NavigationContainer>
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
 });
 
 export default App;
-
-

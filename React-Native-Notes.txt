@@ -1,0 +1,4122 @@
+                                            React Native
+..............................................................................................
+
+What is React Native?
+
+1.React Native is lib for building native mobile apps 
+2.React Native combines the best parts of native development with React, a best-in-class  JavaScript library for building user interfaces.
+
+Mobile App development:
+
+ Mobile apps are built using mobile platforms and os.
+
+Mobile platforms:
+1.Android
+2.Ios
+
+Mobile devices are acting front end devices, user interfaces communicates back end services.
+
+Dev:
+ 1.user interface developer/front end developer
+ 2.back end developer
+ 3.full stack developer.
+
+Front end developer who dev apps for  front devices.
+
+Devices:
+ 1.computers - desktop
+ 2.Hand held devices- Mobiles,Tabs..
+ 3.TV,Game consoles
+ 4.IOT devices- It could be any - watches,car,industrial apps,
+
+Dev generally build apps for desktops:
+  Standalone desktop apps
+  Browser based apps- javascript,html,css - react,angular,vue.....
+
+Mobile /Tab apps:
+ Dev builds apps for android platform using java , kotlin pl.
+ in iOS development, you use Swift or Objective-C.
+
+Types of mobile Apps:
+.....................
+
+1.Native Mobile
+2.Web apps
+3.Hybrid apps
+
+1.Native Mobile
+   Mobiles built by using native platform languages- java / Swift.
+2.Web apps
+   Apps built for browsers -Mobile browsers
+3.Hybrid  apps
+   built apps using javascript but it wont run inside browser, runs inside mobile using
+  container(WebView).
+
+
+Hybrid apps:
+
+ Application built using javascript,css,html,looks like native apps.
+
+Why Hybrid Apps?
+
+-incase native apps, we need to maintain two code base for both platform.
+
+Why not to build one single portable app for all platforms?
+
+ That is birth of hybrid apps.
+
+Hybrids apps can be built using existing web tech- js,css,html.
+Js is simple dom language, how to acess platform services such as contacts,networks,storage..
+- a lib was created -cordova , based on cordova adobe started building a framework on top of the cordova , called phoneGap.
+
+...........................................................................................
+
+How to build mobile native apps in portable way using same javascript technology without html
+and css?
+
+That is birth of React Native.
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+React Native Architecture :
+...........................
+
+React native applications are written using react(js) core principles
+ -Component
+ -Props
+ -State
+ -Event Handling
+
+Every react native apps are simple javascript code.
+
+In React Native, there is no webview concept. React native never run inside browser.
+
+Types of React Native code:
+
+React Native code consist of Two things:
+.......................................
+
+1.UI MARK UP Code
+   -  incase of react , html is mark up
+
+UI Mark Up code for React native:
+
+React native does not use html language to build ui elements.
+React Native provides a high level ui components already written, so we can use those
+components only.Why?
+ We are building portable application either for android or ios.
+So we need generic concept for both  platforms. 
+For that React native provides a generic components for both platforms.
+
+Compilation:
+
+What is it? What is happening during compilation?
+
+Source code is converted into another source code - Compilation.
+Another code is platform specific code. android code or ios code.
+if i wirte ui components, ui components will be converted to platform spefic components.
+javascript code will be emitted as it is-app code.
+
+
+
+2.Application logic code
+   - js code - apis,state,props......
+
+
+1.Source Code
+    written in react - UI Code and app logic
+
+2.Compiled code
+    code converted into platform specific code.
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+How react native apps are executed?  Execution Model:
+.....................................................
+
+All views are executed by platform runtimes eg: android by art.
+All javascript is executed by JavaScriptCore Js engine.
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+How to build react native apps?
+
+
+React native apps can be built using two work flows.
+
+
+1.Native Work flow
+
+ If you are already familiar with mobile development, you may want to use React Native CLI.
+ It requires Xcode or Android Studio to get started. If you already have one of these tools installed, you should be able to get up and running within a few minutes. If they are not installed, you should expect to spend about an hour installing and configuring them.
+
+2.Expo Work Flow.
+  If you are new to mobile development, the easiest way to get started is with Expo CLI. Expo is a set of tools built around React Native and, while it has many features, the most relevant feature for us right now is that it can get you writing a React Native app within minutes
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Native work flow:
+ 
+if you want to build professional mobile app you need lot of infrastructure.
+ UI Components
+    -Views,Text,Labels,ListViews,ScrollView,TabView...........
+
+React native core team provides all core components necessary to build mobile apps.
+
+What if i want more components which is not supported by react core team.
+
+YOu need to look at community or companies who provides professional mobile apps.
+
+-Community -https://reactnative.directory/
+
+
+Expo Work flow:
+...............
+What is expo?
+
+ Expo is a framework and a platform for universal React applications. It is a set of tools and services built around React Native and native platforms that help you develop, build, deploy, and quickly iterate on iOS, Android, and web apps from the same JavaScript/TypeScript codebase.
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Setup :
+
+Expo work flow Setup
+....................
+
+1.install expo-cli
+
+npm install -g expo-cli
+
+2.Create project
+
+expo init AwesomeProject
+cd AwesomeProject
+npm start # you can also use: expo start
+
+Expo apps can be created in two ways
+
+
+Managed Work flow:
+
+  With the managed workflow you only write JavaScript / TypeScript and Expo tools and services take care of everything else for you.
+
+  The managed workflow is kind of like Rails and Create React App, but for React Native.
+
+Apps are built with the managed workflow using the expo-cli, the Expo Go app on your mobile device, and our various services: push notifications, the build service, and over-the-air (OTA) updates. 
+
+Expo tries to manage as much of the complexity of building apps for you as we can, which is why we call it the managed workflow.
+
+ A developer using the managed workflow doesn't use Xcode or Android Studio, they just write JavaScript code and manage configuration for things like the app icon and splash screen through app.json.
+
+ The Expo SDK exposes an increasingly comprehensive set of APIs that give you the power to access device capabilities like the camera, biometric authentication, file system, haptics, and so on.
+
+Bare Work flow:
+
+  In the bare workflow you have full control over every aspect of the native project, and Expo tools and services are a little more limited.
+
+In the bare workflow the developer has complete control, along with the complexity that comes with that. You can use most APIs in the Expo SDK, but the build service and easy Configuration with app.json / app.config.js are not yet supported.
+
+Running your React Native application in case of expo work flow:
+.................................................................
+
+1.You can run and test app inside browser itself- this is not recommended for complex apps.
+
+2.You can run inside your device directly.
+  Expo offers called expo client.
+3.You can use emulators -Andorid virtual devices or emulators.
+
+Metro Bundler:
+-Online compiler, compiles code into react native 
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Create Native Project: Using native work flow:
+..............................................
+
+Steps:
+......
+
+1.npm install react-native-cli -g
+
+2.Create Project
+ react-native init AwesomeNativeProject
+
+3.Running Project
+ Run instructions for Android:
+    • Have an Android emulator running (quickest way to get started), or a device connected.
+    • cd "C:\session\ibm\2021\march\reactnative\AwesomeNativeProject" && npx react-native run-android
+
+Android Builder:
+info Running jetifier to migrate libraries to AndroidX. You can disable it using "--no-jetifier" flag.
+Jetifier found 903 file(s) to forward-jetify. Using 12 workers...
+info Starting JS server...
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+info Launching emulator...
+info Successfully launched emulator.
+info Installing the app...
+Downloading https://services.gradle.org/distributions/gradle-6.7-all.zip
+.............10%..............20%..............30%..............40%..............50%..............60%..............70%..............80%..............90%..............100%
+
+Welcome to Gradle 6.7!
+
+Here are the highlights of this release:
+ - File system watching is ready for production use
+ - Declare the version of Java your build requires
+ - Java 15 support
+
+For more details see https://docs.gradle.org/6.7/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+File C:\Users\sasub\.android\repositories.cfg could not be loaded.
+Checking the license for package Android SDK Build-Tools 29.0.2 in C:\Users\sasub\AppData\Local\Android\Sdk\licenses
+License for package Android SDK Build-Tools 29.0.2 accepted.
+Preparing "Install Android SDK Build-Tools 29.0.2 (revision: 29.0.2)".
+"Install Android SDK Build-Tools 29.0.2 (revision: 29.0.2)" ready.
+Installing Android SDK Build-Tools 29.0.2 in C:\Users\sasub\AppData\Local\Android\Sdk\build-tools\29.0.2
+"Install Android SDK Build-Tools 29.0.2 (revision: 29.0.2)" complete.
+"Install Android SDK Build-Tools 29.0.2 (revision: 29.0.2)" finished.
+
+> Task :app:compileDebugJavaWithJavac
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libc++_shared.so, libevent-2.1.so, libevent_core-2.1.so, libevent_extra-2.1.so, libfb.so, libfbjni.so, libflipper.so, libfolly_futures.so, libfolly_json.so, libglog.so, libglog_init.so, libhermes-executor-common-debug.so, libhermes-executor-common-release.so, libhermes-executor-debug.so, libhermes-executor-release.so, libhermes-inspector.so, libimagepipeline.so, libjsc.so, libjscexecutor.so, libjsijniprofiler.so, libjsinspector.so, libnative-filters.so, libnative-imagetranscoder.so, libreact_codegen_reactandroidspec.so, libreact_nativemodule_core.so, libreactnativeblob.so, libreactnativejni.so, libreactnativeutilsjni.so, libreactperfloggerjni.so, libturbomodulejsijni.so, libyoga.so.
+
+> Task :app:installDebug
+Installing APK 'app-debug.apk' on 'Nexus_6_API_29(AVD) - 10' for app:debug
+Installed on 1 device.
+
+BUILD SUCCESSFUL in 5m 10s
+29 actionable tasks: 29 executed
+info Connecting to the development server...
+8081
+info Starting the app on "emulator-5554"...
+Starting: Intent { cmp=com.awesomenativeproject/.MainActivity }
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Entry point For react native application? How to mount react native apps?
+
+import {AppRegistry} from 'react-native';
+import App from './App';
+import {name as appName} from './app.json';
+
+AppRegistry.registerComponent(appName, () => App);
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+React Native Application Architecture:
+......................................
+
+React Native apps are collection of components(From react native core,third party components,expo components).
+
+Basic template :
+
+import React from 'react'
+
+Components:
+...........
+
+1.Text --- <p>
+
+import React from 'react';
+import {Text} from 'react-native';
+
+
+export default function App(){
+    return <Text>Hello!</Text>
+}
+
+2.View 
+
+ The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls. 
+View maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, <div>, android.view, etc.
+
+import React from 'react';
+import { Text, View } from 'react-native';
+
+
+export default function App() {
+    return <View>
+            <Text>Hello View!</Text>
+    </View>
+}
+
+Any thing will be rendered from left most corner, how to align.
+
+Styles:
+.......
+
+In react Styles are added through css, react native does not css because no html is used.
+
+React Native does not allow css directly. Java script has api to add styles via code.
+
+eg.
+in html
+
+document.getElementById('myid').styles.add.backgroundColor='red'
+
+React Native uses javascript api to add styles to any UI Element.
+
+Style is Object, which contains properties
+
+ element.style.property
+
+StyleSheet
+   A StyleSheet is an abstraction similar to CSS StyleSheets
+
+StyleSheet object has method called "create" mehtod
+
+
+StyleSheet.create({
+ styleProperty: propvalue,
+ styleProprety:{
+    styleProp:propValue
+ }
+});
+
+Refer :https://www.w3schools.com/jsref/prop_style_color.asp
+
+
+eg:
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea"
+    },
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    }
+});
+
+export default function App() {
+    return <View style={container}>
+        <Text style={text}>Hello View!</Text>
+        {/**in line style */}
+        <Text style={{
+            color: "red",
+            textAlign: "center",
+            fontSize: 30
+        }}>Hello View!</Text>
+
+    </View>
+}
+
+// export default function App() {
+//     return <View style={appStyles.container}>
+//         <Text style={appStyles.text}>Hello View!</Text>
+//         {/**in line style */}
+//         <Text style={{
+//             color: "red",
+//             textAlign: "center",
+//             fontSize: 30
+//         }}>Hello View!</Text>
+
+//     </View>
+// }
+// const appStyles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         padding: 24,
+//         backgroundColor: "#eaeaea"
+//     },
+//     text: {
+//         color: "#20232a",
+//         textAlign: "center",
+//         fontSize: 30
+//     }
+// });
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Data binding : props
+
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea"
+    },
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    }
+});
+
+const Greeting = props => <>
+    <Text style={text}>{props.message}</Text>
+</>
+
+const App = () => {
+    return <View style={container}>
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+    </View>
+}
+export default App;
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+How to modularize the components?
+
+components/greeting.jsx
+
+import React from 'react';
+import { Text, StyleSheet } from 'react-native';
+
+export const { text } = StyleSheet.create({
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    }
+});
+
+export const Greeting = props => <>
+    <Text style={text}>{props.message}</Text>
+</>
+
+App.js
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Greeting } from './components/greeting';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea"
+    },
+});
+
+const App = () => {
+    return <View style={container}>
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+        <Greeting message="Hello Props View" />
+    </View>
+}
+export default App;
+////////////////////////////////////////////////////////////////////////////////////////////
+Properties for Built in React Native Components
+...............................................
+
+export const Greeting = props => <>
+    <Text onPress={() => alert('pressed')} style={text}>{props.message}</Text>
+</>
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+State:
+
+1.class Component
+2.using functions with hooks
+
+
+Using Component:
+
+import React, { Component } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+export default class App extends Component {
+    state = {
+        counter: 1
+    };
+    //listener function
+    onIncrement = () => {
+        //alert('button is clicked')
+        this.setState((state) => {
+            return {
+                counter: state.counter + 1
+            }
+        })
+    }
+    render() {
+        return <View style={container}>
+            <Text style={text}>Counter {this.state.counter}</Text>
+            <Button title="Increment" onPress={this.onIncrement} />
+        </View>
+    }
+}
+
+Using Hooks:
+............
+import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+const App = () => {
+    const [counter, setCounter] = useState(1);
+    const onIncrement = () => {
+        setCounter(counter + 1);    }
+    return <View style={container}>
+        {/**state as prop */}
+        <CounterDisplay counter={counter} onIncrement={onIncrement} />
+    </View>
+}
+//presentational component
+export const CounterDisplay=({counter,onIncrement})=>{
+    return <>
+         <Text style={text}>Counter {counter}</Text>
+         <Button title="Increment" onPress={onIncrement} color="green"/>
+      </>
+}
+
+export default App;
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+How to use colors?
+
+ -color names; red blue; which is not mostly recommended.
+ -color values ; #
+
+Color Representation:
+
+RGB
+HSL
+color init
+color strings
+
+Color apis:
+
+PlatformColor : lets you reference the platform's color system.
+DynamicColorIOS:
+ is iOS specific and allows you to specify which colors should be used in light or Dark Mode.
+
+PlatformColor
+
+PlatformColor(color1, [color2, ...colorN]);
+
+ You can use the PlatformColor function to access native colors on the target platform by supplying the native color’s corresponding string value
+
+If you pass more than one string value to the PlatformColor function, it will treat the first value as the default and the rest as fallback.
+
+PlatformColor('bogusName', 'linkColor');
+
+Supported colors
+:
+For a full list of the types of system colors supported.
+
+Android:
+R.attr - ?attr prefix
+R.color - @android:color prefix
+iOS (Objective-C and Swift notations):
+UIColor Standard Colors
+UIColor UI Element Colors
+
+select method how works?
+ select internally applies if logic to select os
+
+Platform.OS === 'platform' or a Platform.select()
+
+
+
+import React from 'react';
+import {
+    Platform,
+    PlatformColor,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
+
+const App = () => (
+    <View style={styles.container}>
+        <Text style={styles.label}>
+            I am a special label color!
+    </Text>
+    </View>
+);
+
+const styles = StyleSheet.create({
+    label: {
+        padding: 16,
+        ...Platform.select({
+            ios: {
+                color: PlatformColor('label'),
+                backgroundColor:
+                    PlatformColor('systemTealColor'),
+            },
+            android: {
+                color: PlatformColor('?android:attr/textColor'),
+                backgroundColor:
+                    PlatformColor('@android:color/holo_blue_bright'),
+            },
+            default: { color: 'black' }
+        })
+    },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...Platform.select({
+            ios: {
+                color: PlatformColor('label'),
+                backgroundColor:
+                    PlatformColor('systemTealColor'),
+            },
+            android: {
+                color: PlatformColor('?android:attr/textColor'),
+                backgroundColor:
+                    PlatformColor('@android:color/holo_orange_dark'),
+            },
+            default: { color: 'black' }
+        })
+    }
+});
+
+export default App;
+///////////////////////////////////////////////////////////////////////////////////////////
+
+How to get Input from the User?
+
+TextInput:
+import { View, StyleSheet, Text, Button, TextInput, Alert } from 'react-native';
+import React, { useState } from 'react';
+
+const GetInput = () => {
+    const [text,setText]= useState('ram');
+  
+    const update = name => {
+        setText(name)
+    }
+    const getName = ()=>{
+        Alert.alert(text);
+    }
+    return <>
+        <Text>Enter Name</Text>
+        <TextInput style={styles.input} value={text} onChangeText={update} />
+        <Button title="Enter Name" onPress={getName} color="green"/>
+    </>
+}
+
+const App = () => <View style={styles.container}>
+    <GetInput />
+</View>
+
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    label: {
+        fontSize: 25,
+        color: 'red'
+    },
+    input: {
+        width: '100%',
+        borderColor: 'black',
+        borderWidth: 1,
+        padding: 10,
+        marginBottom: 10
+    },
+    listItem: {
+        padding: 10,
+        marginVertical: 10,
+        backgroundColor: 'pink'
+    }
+});
+///////////////////////////////////////////////////////////////////////////////////////////
+Layouts:
+........
+-Every UI, Design starts with box, Box model.
+-Every Element/Widget/Component is a box.
+
+
+Every Box has the following properties
+
+1.width
+2.height
+
+measurements are specified using device px, in react native we dont tell units.
+
+ width: 100px / 100% -html
+
+The value of width  of an component , in general the "width of container"
+The value of height of an component ,the component height.
+
+space :
+
+Space can allocated of an component 
+
+1.margin
+   The space allocated outside component
+2.padding
+  The space allocated inside component
+
+
+
+Faces of widget:
+................
+
+Clock wise order
+ Top---Right---bottom--left
+
+space allocation based on sides
+
+leftMargin:10
+rightMargin:10
+topMargin:10
+bottomMargin:10
+
+padding : left,right,top,bottom
+
+Allocate 10px padding and margin equally in all sides
+
+padding : 10
+
+margin :10
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+******************************************************************************************
+
+Layout types in css:
+
+1.box layout - height,width,float,alignments
+2.grid layout.
+3.flex box
+
+
+Flex Box:
+
+What is flex box / flex?
+
+The flex box is specification introduced in css  to build responsive web application alternate
+to grid layout.
+
+flexbox is one dimensional layout model, where as gird layout is two dimensional layout.
+
+Any layout is box based design
+
+layout is rendered as row-column coimbation : two dimensional layout
+     "Grid"
+
+layout is rendered either row or column direction ; one dimensional layout 
+     "Flex"
+
+
+Flex box basics:
+
+Axes of Flex:
+ There are two types of axes
+
+1.Main axis
+2.Cross axis
+
+How to activate the flex layout?
+
+ Flex layout is already activated in side every react native elements.
+
+we can override flex property
+eg:
+
+flex : 1 
+
+container and child:
+
+Container is an Component , inside we lay out other elements called childrens
+
+ if you set flex property, child elements layout will be decided based on parent element.
+
+The main axis is defined by "flex-direction" which has four values
+
+
+The main axis is defined by "flex-direction" which has four values
+
+ row
+ row-reverse
+ column
+ column-reverse
+
+ flexDirection: row | column | row-reverse | column-reverse
+
+flex
+
+ <View style={styles.container}>
+        <Text style={styles.headerStyle}>flex</Text>
+          <View style={{flex: 1, backgroundColor: '#EE2C38'}} />
+          <View style={{flex: 2, backgroundColor: '#FAA030'}} />
+          <View style={{flex: 3, backgroundColor: '#32B76C'}} />
+        </View>
+  </View>
+
+flex will define how your items are going to “fill” over the available space along your primary axis.
+
+Most of the time you will want your app container to be flex:1 to take all of the screen height.
+
+Space will be divided according to each element flex property. 
+
+In the following example the red, yellow and the green views are all children in the container view that got flex:1. 
+
+The red view got flex:1 , the yellow view got flex:2 and the green view got flex:3 . 
+
+1+2+3=6 which means that red view will get 1/6 of the space, the yellow 2/6 of the space and the red 3/6 of the space. I think you got it…
+
+
+Child elements takes the space of parent element - lets say partent has 100px
+ now i want two child elements - one need 50px another 50px
+  3 elements - 30, 50 ? 20
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native'
+
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         flexDirection: 'row', //column,column-reverse,row-reverse
+//         backgroundColor: 'brown',
+//         paddingTop: 50
+//     },
+// });
+
+// const App = () => {
+
+//     {/**container */ }
+//     return <View style={styles.container}>
+//         <View style={{ backgroundColor: 'yellow', width: 50, height: 50 }}>
+//             <Text>Box-1</Text>
+//         </View>
+//         <View style={{ backgroundColor: 'pink', width: 50, height: 50 }}>
+//             <Text>Box-2</Text>
+//         </View>
+//         <View style={{ backgroundColor: 'lightblue', width: 50, height: 50 }}>
+//             <Text>Box-3</Text>
+//         </View>
+//     </View>
+
+// }
+
+// const App = () => {
+
+//     {/**container */ }
+//     return <View style={styles.container}>
+//         <View  style={{ flex:1, backgroundColor: 'yellow', width: 50, height: 50 }}>
+//             <Text>Box-1</Text>
+//         </View>
+//         <View style={{ flex:1, backgroundColor: 'pink', width: 50, height: 50 }}>
+//             <Text>Box-2</Text>
+//         </View>
+//         <View style={{ flex:3, backgroundColor: 'lightblue', width: 50, height: 50 }}>
+//             <Text>Box-3</Text>
+//         </View>
+//     </View>
+
+// }
+const App = () => {
+    return (<View style={styles.container}>
+        <Text style={styles.headerStyle}>flex</Text>
+        <View style={[{ flex: 1 }, styles.elementsContainer]}>
+            <View style={{ flex: 1, backgroundColor: '#EE2C38' }} />
+            <View style={{ flex: 2, backgroundColor: '#FAA030' }} />
+            <View style={{ flex: 4, backgroundColor: '#32B76C' }} />
+        </View>
+    </View>
+    );
+}
+
+
+const styles = {
+    container: {
+        marginTop: 48,
+        flex: 1,
+        backgroundColor:'pink'
+    },
+    headerStyle: {
+        fontSize: 36,
+        textAlign: 'center',
+        fontWeight: '100',
+        marginBottom: 24
+    },
+    elementsContainer: {
+        backgroundColor: 'black',
+        marginLeft: 24,
+        marginRight: 24,
+        marginBottom: 24
+    }
+}
+
+
+export default App;
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Array of Elements:
+.................
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Users } from './mock-data/users';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'pink',
+        flexDirection:'column',
+        padding:50
+    }
+})
+
+const App = () => {
+    return <View style={styles.container}>
+        {
+            Users.map((user, index) => {
+                return <View style={{padding:30}} key={index}>
+                    <Text>{user.name}</Text>
+                </View>
+            })
+        }
+    </View>
+}
+export default App;
+
+if you look the result in this app, all elements are not displayed, we need to scrollbar.
+
+ScrollView:
+...........
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Users } from './mock-data/users';
+import Constants from 'expo-constants';
+
+// const styles = StyleSheet.create({
+
+//     container: {
+//         flex: 1,
+//         backgroundColor: 'pink',
+//         flexDirection: 'column',
+//     },
+//     scrollView: {
+//         backgroundColor: 'yellow',
+//         marginHorizontal: 20,
+//     }
+// })
+
+// const App = () => {
+//     return <View style={styles.container}>
+//         {
+//             Users.map((user, index) => {
+//                 return <ScrollView style={styles.scrollView} key={index}>
+//                     <Text>{user.name}</Text>
+//                 </ScrollView>
+//             })
+//         }
+//     </View>
+// }
+// export default App;
+
+export default function App() {
+    return (
+        <View style={styles.container}>
+            <ScrollView style={styles.scrollView}>
+                <Text style={styles.text}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                    est laborum.
+                </Text>
+                {
+                    Users.map((user, index) => {
+                        return <Text>{user.name}</Text>
+                    })
+                }
+            </ScrollView>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: Constants.statusBarHeight,
+    },
+    scrollView: {
+        backgroundColor: 'pink',
+        marginHorizontal: 20,
+    },
+    text: {
+        fontSize: 42,
+    },
+});
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+FlatList: 
+
+To render list along with scrollbar.
+
+<ScrollView> vs <FlatList> - which one to use?
+
+ScrollView renders all its react child components at once, but this has a performance downside.
+
+Imagine you have a very long list of items you want to display, maybe several screens worth of content. Creating JS components and native views for everything all at once, much of which may not even be shown, will contribute to slow rendering and increased memory usage.
+
+This is where FlatList comes into play. FlatList renders items lazily, when they are about to appear, and removes items that scroll way off screen to save memory and processing time.
+
+FlatList is also handy if you want to render separators between your items, multiple columns, infinite scroll loading, or any number of other features it supports out of the box.
+
+Fully cross-platform.
+Optional horizontal mode.
+Configurable viewability callbacks.
+Header support.
+Footer support.
+Separator support.
+Pull to Refresh.
+Scroll loading.
+ScrollToIndex support.
+Multiple column support.
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Users } from './mock-data/users';
+import Constants from 'expo-constants';
+
+const App = () => {
+    const [users, setUsers] = useState(Users);
+
+    return <View styles={styles.container}>
+        <FlatList 
+         keyExtractor={(item)=>item.id} 
+         data={users}
+         renderItem={({item}) => (
+            <Text style={styles.item}>{item.name}</Text>
+        )} />
+    </View>
+}
+
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 40,
+        paddingHorizontal: 20,
+        backgroundColor: '#fff'
+    },
+    item: {
+        flex: 1,
+        marginHorizontal: 10,
+        marginTop: 25,
+        padding: 30,
+        backgroundColor: 'pink',
+        fontSize: 24
+    }
+})
+////////////////////////////////////////////////////////////////////////////////////////////
+Properties:
+
+data - bind a data source to list.
+renderItem is a function takes arg- item object,index,separator object
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+SectionList Component:
+.....................
+
+Based On Section:
+
+A 
+ Arun
+ Arjun
+B
+ Bala
+ Babu
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, StatusBar, SectionList } from 'react-native';
+import { DISHES } from './mock-data/dishes'
+
+const Item = ({ title }) => (
+    <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+    </View>
+);
+const App = () => {
+    return <SectionList
+        sections={DISHES}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({ item }) => <Item title={item} />}
+        renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.header}>{title}</Text>
+        )}
+    />
+};
+
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
+        marginHorizontal: 16
+    },
+    item: {
+        backgroundColor: "#f9c2ff",
+        padding: 20,
+        marginVertical: 8
+    },
+    header: {
+        fontSize: 32,
+        backgroundColor: "#fff"
+    },
+    title: {
+        fontSize: 24
+    }
+});
+///////////////////////////////////////////////////////////////////////////////////////////
+
+Images:
+.......
+
+Loading Images locally:
+......................
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import icon from './assets/icon.png'
+
+
+const App = () => {
+    return <View style={styles.container}>
+        <Image source={icon} style={styles.image}></Image>
+        <Text style={{ color: '#888', fontSize: 18 }}>To share a photo from Your Phone Just Press Button below!</Text>
+    </View>
+}
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image: {
+        width: 305,
+        height: 159
+    }
+})
+
+Load images from network:
+........................
+
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import icon from './assets/icon.png'
+
+
+const App = () => {
+    const imageUri = "https://i.imgur.com/TkIrScD.png";
+    return <View style={styles.container}>
+        <Image source={{ uri: imageUri }} style={styles.image}></Image>
+
+        <Text style={{ color: '#888', fontSize: 18 }}>To share a photo from Your Phone Just Press Button below!</Text>
+    </View>
+}
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    image: {
+        width: 305,
+        height: 159
+    }
+})
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Handling Touch Features in Mobile:
+...................................
+Users interact with mobile apps mainly through touch. They can use a combination of gestures, such as tapping on a button, scrolling a list, or zooming on a map. React Native provides components to handle all sorts of common gestures, as well as a comprehensive gesture responder system to allow for more advanced gesture recognition, but the one component you will most likely be interested in is the basic Button.
+
+
+Touchable Components:
+.....................
+
+If the basic button doesn't look right for your app, you can build your own button using any of the "Touchable" components provided by React Native. The "Touchable" components provide the capability to capture tapping gestures, and can display feedback when a gesture is recognized. These components do not provide any default styling,
+
+1.TouchableHighLight && TouchableOpacity
+....................
+import React, { useState } from 'react';
+import {
+    Platform,
+    PlatformColor,
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    TouchableOpacity,
+    View
+} from 'react-native';
+
+export const { container, text, button } = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        color: "blue",
+        textAlign: "center",
+        fontSize: 30
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "lightgray",
+        padding: 10
+    }
+
+});
+
+const App = () => {
+    const [count, setCount] = useState(0);
+    const onIncrement = () => setCount(count + 1);
+    return <View style={container}>
+        <TouchableHighlight onPress={onIncrement} activeOpacity={0.6}
+            underlayColor="#DDDDDD">
+            <View style={button}>
+                <Text>Touch Me!</Text>
+            </View>
+        </TouchableHighlight>
+        <TouchableOpacity>
+            <View style={button}>
+                <Text>Touch Me!</Text>
+            </View>
+        </TouchableOpacity>
+    </View>
+}
+
+export default App;
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+                                      Networking
+////////////////////////////////////////////////////////////////////////////////////////////
+
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
+
+class ChildOne extends React.Component {
+  constructor() {
+    super();
+    console.log('Child One is called')
+  }
+  componentDidMount() {
+    console.log('Child one Ui is rendered')
+  }
+  render() {
+    console.log('Child one render is called')
+    return <View>
+      <Text>Child One</Text>
+      <ChildTwo></ChildTwo>
+    </View>
+  }
+}
+class ChildTwo extends React.Component {
+  constructor() {
+    super();
+    console.log('Child Two is called')
+  }
+  componentDidMount() {
+    console.log('Child Two Ui is rendered')
+  }
+  render() {
+    console.log('Child Two render is called')
+    return <View>
+      <Text>Child Two</Text>
+    </View>
+  }
+}
+
+export default class App extends React.Component {
+  //add constructor
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null, // if any ajax error
+      isLoaded: false, //Progress bar enabler
+      items: []  // data to be filed
+    };
+    console.log('Parent constructor is called')
+  }
+  componentDidMount() {
+    console.log('Parent Ui is rendered')
+    //api code.
+    const url = "https://jsonplaceholder.typicode.com/todos"
+    fetch(url)
+      .then(res => res.json())
+      .then((result) => {
+        this.setState({
+          isLoaded: true,
+          items: result
+        });
+      },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
+  }
+  static getDerivedStateFromProps(props, state) {
+    //  console.log(`Current State ${JSON.stringify(state)} Current Prop ${JSON.stringify(prop)}`)
+
+  }
+  componentDidUpdate() {
+    console.log('Ui is updated')
+  }
+
+
+  render() {
+    const { error, isLoaded, items } = this.state;
+    console.log('Parent  render is called')
+    if (error) {
+      return <View style={styles.error}> Error: {error.message}</View>;
+    } else if (!isLoaded) {
+      return <View style={styles.loader}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>;
+    } else {
+      return (<View styles={styles.container}>
+        <FlatList
+          keyExtractor={(item) => item.id + ""}
+          data={items}
+          renderItem={({ item }) => {
+            //  console.log(item);
+            return <Text style={styles.item}>{item.title}</Text>
+          }} />
+      </View>);
+    }
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  error: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loader: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    flex: 1,
+    marginHorizontal: 10,
+    marginTop: 25,
+    padding: 30,
+    backgroundColor: 'pink',
+    fontSize: 24
+  }
+});
+
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, StyleSheet, StatusBar, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
+
+
+const App = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+    //compoentDidMount life cycle api
+    useEffect(() => {
+        fetch('https://reactnative.dev/movies.json')
+            .then((response) => response.json())
+            .then((json) => setData(json.movies))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
+
+    return (
+        <View style={styles.container}>
+            {isLoading ? <ActivityIndicator size="large" color="#00ff00" />
+                : (
+                    <FlatList
+                        data={data}
+                        keyExtractor={({ id }, index) => id}
+                        renderItem={({ item }) => (
+                            <Text>{item.title}, {item.releaseYear}</Text>
+                        )}
+                    />
+                )}
+        </View>
+    );
+};
+export default App;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+        justifyContent: 'center'
+    },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontSize: 32,
+    },
+});
+
+React Native Redux:
+import React, { useState } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { createStore } from 'redux';
+import { connect, Provider } from 'react-redux';
+
+export const { container, text } = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        backgroundColor: "#eaeaea",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+//Sending request to store
+//action ; literal object ;
+const IncrementAction = {
+    type: 'INCREMENT'
+};
+//reducer
+const CounterReducer = (counter = 10, action) => {
+    //logic
+    switch (action.type) {
+        case 'INCREMENT':
+            //return new state
+            return counter + 1;
+        default:
+            //must return default state
+            return counter;
+    }
+}
+//create store
+const store = createStore(CounterReducer);
+/////////////////////////////////////////////////////////////////////////////////
+//mapper function ; convert redux state into react props
+
+function mapStateToProp(counter) {
+    //mapper object
+    return {
+        //left: right - prop:state
+        counter: counter
+    }
+}
+function IncrementComponent(props) {
+    //event listener
+    function onIncrement(e) {
+        //TODO
+        props.dispatch(IncrementAction)
+    }
+    return <View style={container}>
+        <Text>React Native - Redux - Counter App</Text>
+        <Text>Increment : {props.counter}</Text>
+        <Button title="+" onPress={onIncrement} />
+    </View>
+}
+const IncrementContainer = connect(mapStateToProp)(IncrementComponent);
+
+const App = () => {
+
+    return <View style={container}>
+        {/**state as prop */}
+        <Provider store={store}>
+            <IncrementContainer />
+        </Provider>
+    </View>
+}
+
+export default App;
+//////////////////////////////////////////////////////////////////////////////////////////////
+                                          React Native Navigation
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+How navigation works?
+
+In a web browser, you can link to different pages using an anchor (<a>) tag. When the user clicks on a link, the URL is pushed to the browser history stack.
+
+ When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page.
+
+React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
+
+React Navigation's stack navigator provides a way for your app to transition between screens and manage navigation history.
+
+If your app uses only one stack navigator then it is conceptually similar to how a web browser handles navigation state - your app pushes and pops items from the navigation stack as users interact with it, and this results in the user seeing different screens. 
+
+A key difference between how this works in a web browser and in React Navigation is that React Navigation's stack navigator provides the gestures and animations that you would expect on Android and iOS when navigating between routes in the stack.
+
+How to start react navigation?
+
+npm install @react-navigation/native @react-navigation/stack
+
+core lib:
+ @react-navigation/native
+
+Types of navigation:
+1.screen to screen - stack navigation -  @react-navigation/stack
+2.Tab - tab based navivation.  @react-navigation/bottom-tabs
+3.Drawer -Drawer navigation.   @react-navigation/drawer
+
+expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view.
+
+Navigation Objects:
+...................
+1.NavigationContainer
+
+import * as React from 'react';
+import { Text, View ,StyleSheet } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+
+const Home = () => {
+    return <View style={styles.container}>
+        <Text>Home Screen</Text>
+    </View>
+}
+
+export default function App() {
+    return <NavigationContainer>
+             {/**screen render- Menu */}
+              <Home></Home>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+///////////////////////////////////////////////////////////////////////////////////////////
+Moving among screens: How to move from one screen to another screen?
+
+StackNavigator : 
+ Object used to navigate between screen.
+ Stack Object used to  represent stack navigator.
+
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const Stack  = createStackNavigator();
+console.log(Stack)
+
+Object {
+  "Navigator": [Function StackNavigator],
+  "Screen": [Function Screen],
+}
+
+
+1.createStackNavigator is a function that returns an object containing 2 properties: Screen and Navigator.
+2.Both of them are React components used for configuring the navigator.
+The Navigator should contain Screen elements as its children to define the configuration for routes.
+
+3.NavigationContainer is a component which manages our navigation tree and contains the navigation state. This component must wrap all navigators structure. Usually, we'd render this component at the root of our app, which is usually the component exported from App.js.
+
+..............................................................................................
+
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const Stack = createStackNavigator();
+console.log(Stack)
+
+const Home = () => {
+    return <View style={styles.container}>
+        <Text>Home Screen</Text>
+    </View>
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Stack.Navigator>
+              <Stack.Screen name="Home" component={Home}/>
+        </Stack.Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+//////////////
+
+With DeStructuring:
+
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+const Home = () => {
+    return <View style={styles.container}>
+        <Text>Home Screen</Text>
+    </View>
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator>
+            <Screen name="Home" component={Home} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+*****************************************************************************************
+Moving between Screens:
+......................
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+const Home = () => {
+    return <View style={styles.container}>
+        <Text>Home Screen</Text>
+    </View>
+}
+const DetailsScreen = () => {
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen</Text>
+        </View>
+    );
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator>
+            <Screen name="Home" component={Home} />
+            <Screen name="Details" component={DetailsScreen} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+Now our stack has two routes, a Home route and a Details route. A route can be specified by using the Screen component. The Screen component accepts a name prop which corresponds to the name of the route we will use to navigate, and a component prop which corresponds to the component it'll render.
+
+Here, the Home route corresponds to the HomeScreen component, and the Details route corresponds to the DetailsScreen component. The initial route for the stack is the Home route. Try changing it to Details and reload the app (React Native's Fast Refresh won't update changes from initialRouteName, as you might expect), notice that you will now see the Details screen. Then change it back to Home and reload once more.
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Router Properties: Screen Props:
+...............................
+
+Specifying options:
+..................
+Each screen in the navigator can specify some options for the navigator, such as the title to render in the header. These options can be passed in the options prop for each screen component:
+
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{ title: 'Welcome to Start Token' }}
+/>
+Passing additional props#
+.........................
+
+Sometimes we might want to pass additional props to a screen.
+
+We can do that with 2 approaches:
+
+1.Use React context and wrap the navigator with a context provider to pass data to the screens (recommended).
+
+2.Use a render callback for the screen instead of specifying a component prop:
+
+<Stack.Screen name="Home">
+  {props => <HomeScreen {...props} anyprop={"componentspecifcprop"} />}
+</Stack.Screen>
+
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+const HomeScreen = props => {
+    console.log(props);
+    return <View style={styles.container}>
+        <Text>Home Screen : {props.extraData}</Text>
+    </View>
+}
+const DetailsScreen = () => {
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen</Text>
+        </View>
+    );
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator>
+            {/* <Screen options={{title:"Whats App"}} name="Home" component={Home} /> */}
+            <Screen name="Home" options={{ title: 'Welcome to Start Token' }}>
+                {props => <HomeScreen {...props} extraData={"Start Token"} />}
+            </Screen>
+            <Screen name="Details" component={DetailsScreen} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+How to tell which routes should be displayed first? - as Home
+
+1.Generally Based on order the first screen will be rendered as Home Route.
+2.In the Navigator , we can tell "initialRouteName"
+
+With Screen Order:
+  <NavigationContainer>
+            <Navigator>
+	
+                <Screen name="Home"  options={{ title: 'Welcome to Start Token' }}>
+                    {props => <HomeScreen {...props} extraData={"Start Token"} />}
+                </Screen>
+              
+                <Screen  name="Details" component={DetailsScreen} />
+            </Navigator>
+        </NavigationContainer>
+
+
+With inital Route Name
+eg:
+  <NavigationContainer>
+            <Navigator initialRouteName="Details">
+                {/* <Screen options={{ title: 'Welcome to Start Token' }} name="Home" component={HomeScreen} /> */}
+                <Screen name="Home"  options={{ title: 'Welcome to Start Token' }}>
+                    {props => <HomeScreen {...props} extraData={"Start Token"} />}
+                </Screen>
+              
+                <Screen  name="Details" component={DetailsScreen} />
+            </Navigator>
+        </NavigationContainer>
+
+
+Recap:
+
+React Native doesn't have a built-in API for navigation like a web browser does. React Navigation provides this for you, along with the iOS and Android gestures and animations to transition between screens.
+
+Stack.Navigator is a component that takes route configuration as its children with additional props for configuration and renders our content.
+
+Each Stack.Screen component takes a name prop which refers to the name of the route and component prop which specifies the component to render for the route. These are the 2 required props.
+
+To specify what the initial route in a stack is, provide an initialRouteName as the prop for the navigator.
+
+To specify screen-specific options, we can pass an options prop to Stack.Screen, and for common options, we can pass screenOptions to Stack.Navigator
+
+...........................&&&&&&&&&&&&&&&&.......................................
+
+How do I go from the Home route to the Details route?".
+
+
+If this was a web browser, we'd be able to write something like this:
+
+<a href="details.html">Go to Details</a>
+
+<a
+  onClick={() => {
+    window.location.href = 'details.html';
+  }}
+>
+  Go to Details
+</a>
+
+We'll do something similar to the latter, but rather than using a window.location global, we'll use the navigation prop that is passed down to our screen components.
+
+Every Component Will receive prop from the Navigator, 
+  <Navigator initialRouteName="Home">
+            <Screen name="Home" component={HomeScreen} options={{ title: 'Welcome to Start Token' }} />
+            <Screen name="Details" component={DetailsScreen} />
+        </Navigator>
+
+Inside component 
+const HomeScreen = props => {
+    console.log(props);
+    return <View style={styles.container}>
+        <Text>Home Screen : {props.extraData}</Text>
+    </View>
+}
+
+if you look at the props, which will have two important objects
+
+1.Navigation
+
+2.route
+
+Navigation Object contains the following properties:
+
+"navigation": Object {
+    "addListener": [Function addListener],
+    "canGoBack": [Function canGoBack],
+    "dangerouslyGetParent": [Function dangerouslyGetParent],
+    "dangerouslyGetState": [Function anonymous],
+    "dispatch": [Function dispatch],
+    "goBack": [Function anonymous],
+    "isFocused": [Function isFocused],
+    "navigate": [Function anonymous],
+    "pop": [Function anonymous],
+    "popToTop": [Function anonymous],
+    "push": [Function anonymous],
+    "removeListener": [Function removeListener],
+    "replace": [Function anonymous],
+    "reset": [Function anonymous],
+    "setOptions": [Function setOptions],
+    "setParams": [Function anonymous],
+  },
+
+route object properties:
+
+ "route": Object {
+    "key": "Home-ArNsRDkYNB56YbqZsGa7t",
+    "name": "Home",
+    "params": undefined,
+  },
+
+
+navigation Object:
+
+1.navigate method :
+   Used to navigate from one Component to Another Component - screen to screen
+
+import * as React from 'react';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+// const HomeScreen = props => {
+//     console.log(props);
+//     return <View style={styles.container}>
+//         <Text>Home Screen : {props.extraData}</Text>
+//         <Button title="Go to Details" onPress={() => props.navigation.navigate('Details')} />
+//     </View>
+// }
+const HomeScreen = props => {
+    const { navigation, route } = props;
+    return <View style={styles.container}>
+        <Text>Home Screen : {props.extraData}</Text>
+        <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
+    </View>
+}
+const DetailsScreen = (props) => {
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen</Text>
+        </View>
+    );
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator initialRouteName="Home">
+            <Screen name="Home" component={HomeScreen} options={{ title: 'Welcome to Start Token' }} />
+            <Screen name="Details" component={DetailsScreen} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+
+navigation - the navigation prop is passed in to every screen component (definition) in stack navigator (more about this later in "The navigation prop in depth").
+
+
+navigate('Details') - we call the navigate function (on the navigation prop — naming is hard!) with the name of the route that we'd like to move the user to.
+
+navigation
+1.navigate - go to another screen, figures out the action it needs to take to do it
+2.reset - wipe the navigator state and replace it with a new route
+3.goBack - close active screen and move back in the stack
+4.setParams - make changes to route's params
+5.dispatch - send an action object to update the navigation state
+6.setOptions - update the screen's options
+7.isFocused - check whether the screen is focused
+8.addListener - subscribe to updates to events from the navigators
+..............................................................................................
+
+push:
+
+            <Button
+                title="Go to Details... again"
+                onPress={() => navigation.push('Details')}
+            />
+
+  Each time you call push we add a new route to the navigation stack. When you call navigate it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
+
+Each time you call push we add a new route to the navigation stack. When you call navigate it first tries to find an existing route with that name, and only pushes a new route if there isn't yet one on the stack.
+
+Going back#
+
+The header provided by stack navigator will automatically include a back button when it is possible to go back from the active screen (if there is only one screen in the navigation stack, there is nothing that you can go back to, and so there is no back button).
+
+Sometimes you'll want to be able to programmatically trigger this behavior, and for that you can use navigation.goBack();.
+
+function DetailsScreen({ navigation }) {
+
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Details Screen</Text>
+            <Button
+                title="Go to Details... again"
+                onPress={() => navigation.push('Details')}
+            />
+            <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+            <Button title="Go back" onPress={() => navigation.goBack()} />
+        </View>
+    );
+}
+
+
+Another common requirement is to be able to go back multiple screens -- for example, if you are several screens deep in a stack and want to dismiss all of them to go back to the first screen. In this case, we know that we want to go back to Home so we can use navigate('Home') (not push! try that out and see the difference). Another alternative would be navigation.popToTop(), which goes back to the first screen in the stack.
+
+
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() => navigation.push('Details')}
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Go back to first screen in stack"
+        onPress={() => navigation.popToTop()}
+      />
+    </View>
+  );
+}
+
+Recap:
+1.navigation.navigate('RouteName') pushes a new route to the stack navigator if it's not already in the stack, otherwise it jumps to that screen.
+
+2.We can call navigation.push('RouteName') as many times as we like and it will continue pushing routes.
+
+3.The header bar will automatically show a back button, but you can programmatically go back by calling navigation.goBack(). On Android, the hardware back button just works as expected.
+
+4.You can go back to an existing screen in the stack with navigation.navigate('RouteName'), and you can go back to the first screen in the stack with navigation.popToTop().
+
+5.The navigation prop is available to all screen components (components defined as screens in route configuration and rendered by React Navigation as a route).
+.............................................................................................
+                                        Passing parameters to routes
+............................................................................................
+
+Now that we know how to create a stack navigator with some routes and navigate between those routes, let's look at how we can pass data to routes when we navigate to them.
+
+There are two pieces to this:
+
+Pass params to a route by putting them in an object as a second parameter to the navigation.navigate function: navigation.navigate('RouteName', { /* params go here */ })
+
+import * as React from 'react';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+// const HomeScreen = props => {
+//     console.log(props);
+//     return <View style={styles.container}>
+//         <Text>Home Screen : {props.extraData}</Text>
+//         <Button title="Go to Details" onPress={() => props.navigation.navigate('Details')} />
+//     </View>
+// }
+const HomeScreen = props => {
+    const { navigation, route } = props;
+    return <View style={styles.container}>
+        <Text>Home Screen : {props.extraData}</Text>
+        <Button title="Go to Details" onPress={() => navigation.navigate('Details', { id: 1, item: 'React Native' })} />
+    </View>
+}
+const DetailsScreen = (props) => {
+    const { navigation, route } = props;
+    console.log(route.params);
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen : {route.params.id} - {route.params.item}</Text>
+            <Button
+                title="Go to Details... again"
+                onPress={() =>
+                    navigation.push('Details', {
+                        itemId: Math.floor(Math.random() * 100),
+                    })
+                }
+            />
+        </View>
+    );
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator initialRouteName="Home">
+            <Screen name="Home" component={HomeScreen} options={{ title: 'Welcome to Start Token' }} />
+            <Screen name="Details" component={DetailsScreen} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+////////////////////////////////////////////////////////////////////////////////////////////
+Updating params#
+Screens can also update their params, like they can update their state. The navigation.setParams method lets you update the params of a screen.
+Basic usage:
+
+navigation.setParams({
+  query: 'someText',
+})
+
+import * as React from 'react';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+const HomeScreen = props => {
+    const { navigation, route } = props;
+    return <View style={styles.container}>
+        <Text>Home Screen : {props.extraData}</Text>
+        <Button title="Go to Details" onPress={() => navigation.navigate('Details', { id: 1, item: 'React Native' })} />
+    </View>
+}
+const DetailsScreen = (props) => {
+    const { navigation, route } = props;
+    console.log(route.params);
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen : {route.params.id} - {route.params.item}</Text>
+            <Button
+                title="Go to Details... again"
+                onPress={() => {
+                    // navigation.push('Details', {
+                    //     id: Math.floor(Math.random() * 100),
+                    // })
+                    navigation.setParams({ id: 900, item: 'foo' })
+                   }
+                }
+            />
+        </View>
+    );
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator initialRouteName="Home">
+            <Screen name="Home" component={HomeScreen} options={{ title: 'Welcome to Start Token' }} />
+            <Screen name="Details" component={DetailsScreen} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+........................
+Initial params#
+You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an initialParams prop:
+
+<Stack.Screen
+  name="Details"
+  component={DetailsScreen}
+  initialParams={{ itemId: 42 }}
+/>
+
+Initial params#
+You can also pass some initial params to a screen. If you didn't specify any params when navigating to this screen, the initial params will be used. They are also shallow merged with any params that you pass. Initial params can be specified with an initialParams prop:
+
+import * as React from 'react';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+//stack navigator
+import { createStackNavigator } from '@react-navigation/stack'
+
+//create Stack Object
+const { Navigator, Screen } = createStackNavigator();
+
+const HomeScreen = props => {
+    const { navigation, route } = props;
+    return <View style={styles.container}>
+        <Text>Home Screen : {props.extraData}</Text>
+        <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
+    </View>
+}
+const DetailsScreen = (props) => {
+    const { navigation, route } = props;
+    console.log(route.params);
+    return (
+        <View style={styles.container}>
+            <Text>Details Screen : {route.params.id} - {route.params.item}</Text>
+            <Button
+                title="Go to Details... again"
+                onPress={() => {
+                    // navigation.push('Details', {
+                    //     id: Math.floor(Math.random() * 100),
+                    // })
+                    navigation.setParams({ id: 900, item: 'foo' })
+                }
+                }
+            />
+        </View>
+    );
+}
+
+export default function App() {
+    return <NavigationContainer>
+        <Navigator initialRouteName="Home">
+            <Screen name="Home" component={HomeScreen} options={{ title: 'Welcome to Start Token' }} />
+            <Screen name="Details" initialParams={{ id: 1, item: 'React Native v2' }} component={DetailsScreen} />
+        </Navigator>
+    </NavigationContainer>
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+///////////////////////////////////////////////////////////////////////////////////////////
+Passing params to a previous screen#
+
+Params aren't only useful for passing some data to a new screen, but they can also be useful to pass data to a previous screen too. For example, let's say you have a screen with a create post button, and the create post button opens a new screen to create a post. After creating the post, you want to pass the data for the post back to previous screen.
+
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text, Button, TextInput } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const { Navigator, Screen } = createStackNavigator();
+
+function HomeScreen({ navigation, route }) {
+
+    React.useEffect(() => {
+        if (route.params?.post) {
+            // Post updated, do something with `route.params.post`
+            // For example, send the post to the server
+        }
+    }, [route.params?.post]);
+
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button
+                title="Create post"
+                onPress={() => navigation.navigate('CreatePost')}
+            />
+            <Text style={{ margin: 10 }}>Post: {route.params?.post}</Text>
+        </View>
+    );
+}
+
+function CreatePostScreen({ navigation, route }) {
+    const [postText, setPostText] = React.useState('');
+
+    return (
+        <>
+            <TextInput
+                multiline
+                placeholder="What's on your mind?"
+                style={{ height: 200, padding: 10, backgroundColor: 'green' }}
+                value={postText}
+                onChangeText={setPostText}
+            />
+            <Button
+                title="Done"
+                onPress={() => {
+                    // Pass params back to home screen
+                    navigation.navigate('Home', { post: postText });
+                }}
+            />
+        </>
+    );
+}
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Navigator initialRouteName="Home">
+                <Screen name="Home" options={{ title: 'Welcome to Start Token' }}>
+                    {props => <HomeScreen {...props} extraData={"Start Token"} />}
+                </Screen>
+
+                <Screen component={CreatePostScreen} name="CreatePost" />
+
+            </Navigator>
+        </NavigationContainer>
+    );
+}
+
+
+What should be in params#
+It's important to understand what kind of data should be in params. Params are like options for a screen. They should only contain information to configure what's displayed in the screen. Avoid passing the full data which will be displayed on the screen itself (e.g. pass an user id instead of user object). Also avoid passing data which is used by multiple screens, such data should be in a global store.
+
+You can also think of the route object like a URL. If your screen had a URL, what should be in the URL? Params shouldn't contain data that you think should not be in the URL. This often means that you should keep as little data as possible needed to determine what the screen is. Think of visiting a shopping website, when you are seeing product listings, the URL usually contains category name, type of sort, any filters etc., it doesn't contain the actual list of products displayed on the screen.
+
+For example, say if you have a Profile screen. When navigating to it, you might be tempted to pass the user object in the params:
+
+
+// Don't do this
+navigation.navigate('Profile', {
+  user: {
+    id: 'jane',
+    firstName: 'Jane',
+    lastName: 'Done',
+    age: 25,
+  },
+});
+This looks convenient, and lets you access the user objects with route.params.user without any extra work.
+
+
+Recap:
+navigate and push accept an optional second argument to let you pass parameters to the route you are navigating to. For example: navigation.navigate('RouteName', { paramName: 'value' }).
+You can read the params through route.params inside a screen
+You can update the screen's params with navigation.setParams
+Initial params can be passed via the initialParams prop on Screen
+Params should contain the minimal data required to show a screen, nothing more.
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Configuring the header bar
+
+We've seen how to configure the header title already, but let's go over that again before moving on to some other options
+
+A Screen component accepts options prop which is either an object or a function that returns an object, that contains various configuration options. The one we use for the header title is title, as shown in the following example.
+
+    <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'My home' }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={({ route }) => ({ title: route.params.name })}
+        />
+
+
+function StackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ title: 'My home' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() =>
+          navigation.navigate('Profile', { name: 'Custom profile header' })
+        }
+      />
+    </View>
+  );
+}
+
+function ProfileScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'My home' }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={({ route }) => ({ title: route.params.name })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+Updating options with setOptions#
+.................................
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen({ navigation }) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Update the title"
+          onPress={() => navigation.setOptions({ title: 'Updated!' })}
+        />
+      </View>
+    );
+  }
+  
+  const Stack = createStackNavigator();
+  
+  function App() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'My home' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+  
+  export default App;
+///////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+Adjusting header styles#
+.........................
+
+
+There are three key properties to use when customizing the style of your header: headerStyle, headerTintColor, and headerTitleStyle.
+
+headerStyle: a style object that will be applied to the View that wraps the header. If you set backgroundColor on it, that will be the color of your header.
+
+headerTintColor: the back button and title both use this property as their color. In the example below, we set the tint color to white (#fff) so the back button and the header title would be white.
+
+headerTitleStyle: if we want to customize the fontFamily, fontWeight and other Text style properties for the title, we can use this to do it.
+
+
+There are three key properties to use when customizing the style of your header: headerStyle, headerTintColor, and headerTitleStyle.
+
+headerStyle: a style object that will be applied to the View that wraps the header. If you set backgroundColor on it, that will be the color of your header.
+headerTintColor: the back button and title both use this property as their color. In the example below, we set the tint color to white (#fff) so the back button and the header title would be white.
+headerTitleStyle: if we want to customize the fontFamily, fontWeight and other Text style properties for the title, we can use this to do it.
+
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: 'My home',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Sharing common options across screens#
+
+It is common to want to configure the header in a similar way across many screens. For example, your company brand color might be red and so you want the header background color to be red and tint color to be white. Conveniently, these are the colors we're using in our running example, and you'll notice that when you navigate to the DetailsScreen the colors go back to the defaults. Wouldn't it be awful if we had to copy the options header style properties from HomeScreen to DetailsScreen, and for every single screen component we use in our app? Thankfully, we do not. We can instead move the configuration up to the stack navigator under the prop screenOptions
+
+<Stack.Navigator   screenOptions={
+   {
+     headerStyle : { 
+         backgroundColor:'pink'
+     }
+   }
+ } >
+
+</Stack.Navigator>
+
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
+
+function HomeScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen</Text>
+            <Button
+                title="Profile "
+                onPress={() => navigation.navigate('Profile')}
+            />
+        </View>
+    );
+}
+
+function ProfileScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Profile screen</Text>
+            <Button title="Go back" onPress={() => navigation.goBack()} />
+        </View>
+    );
+}
+
+const Stack = createStackNavigator();
+
+function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#f4511e' } }}>
+                <Stack.Screen
+                    name="Home"
+                    component={HomeScreen}
+                    options={{ title: 'Home Screen' }}
+                />
+                <Stack.Screen
+                    name="Profile"
+                    component={ProfileScreen}
+                    options={{ title: 'Profile Screen' }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer >
+    );
+}
+
+export default App;
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Redux-React Native -Navigation:
+
+ <Provider>
+ <NavigationContainer>
+    <Navigator>
+      <Screen/>
+     <Screen/>
+ <Navigator/>
+ <NavigationContainer/>
+ </Provider>
+
+
+import * as React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { Provider, connect } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// A very simple reducer
+function counter(state, action) {
+    if (typeof state === 'undefined') {
+        return 0;
+    }
+
+    switch (action.type) {
+        case 'INCREMENT':
+            return state + 1;
+        case 'DECREMENT':
+            return state - 1;
+        default:
+            return state;
+    }
+}
+
+// A very simple store
+let store = createStore(combineReducers({ count: counter }));
+
+// A screen!
+function Counter({ count, dispatch, navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.paragraph}>{count}</Text>
+            <Button
+                title="Increment"
+                onPress={() => dispatch({ type: 'INCREMENT' })}
+            />
+            <Button
+                title="Decrement"
+                onPress={() => dispatch({ type: 'DECREMENT' })}
+            />
+
+            <Button
+                title="Go to static count screen"
+                onPress={() =>
+                    navigation.navigate('StaticCounter', {
+                        count,
+                    })
+                }
+            />
+        </View>
+    );
+}
+
+// Another screen!
+function StaticCounter({ route }) {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.paragraph}>{route.params.count}</Text>
+        </View>
+    );
+}
+
+// Connect the screens to Redux
+let CounterContainer = connect(state => ({ count: state.count }))(Counter);
+
+// Create our stack navigator
+let RootStack = createStackNavigator();
+
+// Render the app container component with the provider around it
+export default function App() {
+    return (
+        <Provider store={store}>
+            <NavigationContainer>
+                <RootStack.Navigator>
+                    <RootStack.Screen name="Counter" component={CounterContainer} />
+                    <RootStack.Screen
+                        name="StaticCounter"
+                        component={StaticCounter}
+                        options={({ route }) => ({ title: route.params.count })}
+                    />
+                </RootStack.Navigator>
+            </NavigationContainer>
+        </Provider>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ecf0f1',
+        padding: 8,
+    },
+    paragraph: {
+        margin: 24,
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+});
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Other Navigations:
+
+1.Tab Navigation:
+....................
+
+Possibly the most common style of navigation in mobile apps is tab-based navigation. This can be tabs on the bottom of the screen or on the top below the header (or even instead of a header).
+
+
+This guide covers createBottomTabNavigator. You may also use createMaterialBottomTabNavigator and createMaterialTopTabNavigator to add tabs to your application.
+
+Before continuing, first install @react-navigation/bottom-tabs:
+
+npm install @react-navigation/bottom-tabs
+
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+//////////////////////////////////////////////////////////////////////////////////
+
+Tab Buttons and Icons:
+
+npm install --save react-native-vector-icons
+
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
+            } else if (route.name === 'Settings') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'tomato',
+          inactiveTintColor: 'gray',
+        }}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+//////////////////&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&///////////////////////////////////
+
+Tab + Stack Coimbation:
+.......................
+
+
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+function HomeScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Home screen</Text>
+            <Button
+                title="Go to Details"
+                onPress={() => navigation.navigate('Details')}
+            />
+        </View>
+    );
+}
+
+function DetailsScreen() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Details!</Text>
+        </View>
+    );
+}
+function SettingsScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Settings screen</Text>
+            <Button
+                title="Go to Details"
+                onPress={() => navigation.navigate('Details')}
+            />
+        </View>
+    );
+}
+const HomeStack = createStackNavigator();
+
+function HomeStackScreen() {
+    return (
+        <HomeStack.Navigator>
+            <HomeStack.Screen name="Home" component={HomeScreen} />
+            <HomeStack.Screen name="Details" component={DetailsScreen} />
+        </HomeStack.Navigator>
+    );
+}
+
+const SettingsStack = createStackNavigator();
+function SettingsStackScreen() {
+    return (
+        <SettingsStack.Navigator>
+            <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+            <SettingsStack.Screen name="Details" component={DetailsScreen} />
+        </SettingsStack.Navigator>
+    );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+    return (
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
+  }
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Drawer Navigation:
+.................
+npm install @react-navigation/drawer
+
+
+import * as React from 'react';
+import { Button, View,Text } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+
+const Drawer = createDrawerNavigator();
+
+function HomeScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen</Text>
+            <Button
+                onPress={() => navigation.navigate('Notifications')}
+                title="Go to notifications"
+            />
+        </View>
+    );
+}
+function NotificationsScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Notifications Screen</Text>
+            <Button onPress={() => navigation.goBack()} title="Go back home" />
+        </View>
+    );
+}
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Screen name="Home" component={HomeScreen} />
+                <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+            </Drawer.Navigator>
+        </NavigationContainer>
+    );
+}
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
+
+function Feed({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+    </View>
+  );
+}
+
+function Notifications() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Notifications Screen</Text>
+    </View>
+  );
+}
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Close drawer"
+        onPress={() => props.navigation.closeDrawer()}
+      />
+      <DrawerItem
+        label="Toggle drawer"
+        onPress={() => props.navigation.toggleDrawer()}
+      />
+    </DrawerContentScrollView>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Notifications" component={Notifications} />
+    </Drawer.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+
+Recap:
+
+1.Stack Navigator
+2.Tab Navigator
+3.Drawer Navigator
+/////////////////////////////////////////////////////////////////////////////////////////////
+                       Device features-Mobile App Components-React Native Advanced Components
+..............................................................................................
+
+In order to work with Device features:
+
+When you are creating an app that requires access to potentially senstive information on 
+user's device, such as their location, contacts,camera ...you need to ask for the user's
+permission first.
+
+How to get permission from the device?
+
+expo provides an module to work with permissions on both platforms.
+
+$ expo install expo-permissions
+
+Note : if you are working with particular device feature, device specific permission
+package must also be installed
+
+
+Permission type	Packages
+
+NOTIFICATIONS	expo-notifications
+
+USER_FACING_NOTIFICATIONS	expo-notifications
+
+LOCATION	expo-location
+
+CAMERA	expo-barcode-scanner expo-camera 
+        expo-face-detector expo-image-picker expo-media-library
+
+AUDIO_RECORDING	expo-av
+
+CONTACTS	expo-contacts
+
+MEDIA_LIBRARY MEDIA_LIBRARY_WRITE_ONLY	expo-image-picker
+                                        expo-media-library
+CALENDAR	expo-calendar
+
+REMINDERS	expo-calendar
+
+SYSTEM_BRIGHTNESS expo-brightness
+
+MOTION   expo-sensors	
+
+
+import * as Permission from 'expo-permission'
+
+Objects:
+
+1.PermissionResponse
+
+ status: 'granted'|'denied'|'undermined'
+ granted: boolean
+ expires: 'never' | number
+ 
+
+............................................................................................
+
+Note: how to work with async await inside useEffect hook?
+
+useEffect(() => {
+        fetch('https://reactnative.dev/movies.json')
+            .then((response) => response.json())
+            .then((json) => setData(json.movies))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+
+        async function init() {
+            try {
+                const response = await fetch('https://reactnative.dev/movies.json')
+                const json = await response.json();
+                const data = json.movies;
+                setData(data);
+            }
+            catch (e) {
+                console.log(error)
+            }
+            finally {
+                setLoading(false)
+            }
+        }
+        init();
+         //IIFE Syntax
+         (async function(){
+            try {
+                const response = await fetch('https://reactnative.dev/movies.json')
+                const json = await response.json();
+                const data = json.movies;
+                setData(data);
+            }
+            catch (e) {
+                console.log(error)
+            }
+            finally {
+                setLoading(false)
+            }
+         })();
+
+    }, []);
+
+
+
+Location: GPS
+
+expo-location allows reading geolocation information from the device.
+
+$expo install expo-location
+
+How to access Location Object?
+
+ import * as Location from 'expo-location'
+
+Permissions api always return promises, instead of using thenables we can use async...await..
+
+import React, { useState, useEffect } from 'react';
+import { Platform, Text, View, StyleSheet } from 'react-native';
+import * as Location from 'expo-location';
+
+export default function App() {
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        //write IIFE Function to wrap async...await logic
+        (async () => {
+            let { status } = await Location.requestPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+            let location = await Location.getCurrentPositionAsync({});
+            console.log(location)
+            setLocation(location);
+
+        })()
+
+    }, []);
+
+    let text = 'Waiting..';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = JSON.stringify(location);
+    }
+
+    return (<View style={styles.container}>
+        <Text style={{ fontSize: 10 }}>{text}</Text>
+    </View>
+    );
+
+
+}
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+How to integrate Map with Location?
+
+npm install react-native-maps
+import React from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import MapView from 'react-native-maps';
+
+
+export default function App() {
+    return (
+        <View style={styles.container}>
+            <MapView style={styles.map} initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }} />
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    map: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
+});
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+Map and Location:
+................
+
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import MapView from 'react-native-maps';
+import * as Location from 'expo-location';
+
+export default function App() {
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        })();
+    }, []);
+
+    let text = 'Waiting..';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = JSON.stringify(location);
+        console.log(location);
+    }
+    if (!location) {
+        return <View style={styles.container}>
+            <Text>No Location found!</Text>
+        </View>
+    }
+
+    return (<MapView style={{ flex: 1 }} initialRegion={{
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+    }} provider={MapView.PROVIDER_GOOGLE} />);
+
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    map: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
+});
+/////////////////////////////////////////////////////////////////////////////////////////////
+How to access Contacts?
+
+expo-contacts proivdes access to the devices system contacts, allowing you to get contact
+information as well as adding , editing, removing contacts.
+
+expo install expo-contacts
+
+You need to access Permission: Permissions.CONTACTS
+
+
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
+import * as Contacts from 'expo-contacts';
+
+
+export default function App() {
+    const [names, setNames] = useState([])
+
+    useEffect(() => {
+        (async () => {
+            const { status } = await Contacts.requestPermissionsAsync();
+            if (status === 'granted') {
+                //will Return ContactResponse ; data; hasNextPage,hasPreviousNext
+                const contactResponse = await Contacts.getContactsAsync();
+                //ContactResponse has data property which will return arrayof contact
+                const contactList = contactResponse.data;
+                //console.log(contactList);
+                setNames(contactList)
+           
+            }
+        })();
+    }, []);
+
+    return (
+        <View style={styles.container}>
+            <FlatList keyExtractor={(item) => item.id} data={names}
+                renderItem={({ item }) => {
+                    return (<Text style={styles.item}>{item.firstName}</Text>)
+                }} />
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    item: {
+        flex: 1,
+        marginHorizontal: 10,
+        marginTop: 25,
+        padding: 30,
+        backgroundColor: 'pink',
+        fontSize: 24
+    }
+});
+///////////////////////////////////////////////////////////////////////////////////////////////
+Media Api:
+.........
+
+Video and audio:
+...............
+
+expo install expo-av
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, Button } from 'react-native';
+import { Video, AVPlaybackStatus } from 'expo-av';
+
+export default function App() {
+  const video = useRef(null);
+  const [status, setStatus] = useState({});
+  return (
+    <View style={styles.container}>
+      <Video
+        ref={video}
+        style={styles.video}
+        source={{
+          uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+        }}
+        useNativeControls
+        resizeMode="contain"
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title={status.isPlaying ? 'Pause' : 'Play'}
+          onPress={() =>
+            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+          }
+        />
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+  },
+  video: {
+    alignSelf: 'center',
+    width: 320,
+    height: 200,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////
+Network
+expo-network provides useful information about the device's network such as its IP address, MAC address, and airplane mode status.
+
+expo install expo-network
+
+Configuration
+On Android, this module requires permissions to access the network and Wi-Fi state. The permissions ACCESS_NETWORK_STATE and ACCESS_WIFI_STATE are added automatically.
+
+import * as Network from 'expo-network';
+
+Network.getNetworkStateAsync()
+Network.getIpAddressAsync()
+Network.getMacAddressAsync(interfaceName?)
+Network.isAirplaneModeEnabledAsync() (Android only)
+
+import React, { useEffect } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import * as Network from 'expo-network';
+
+export default function App() {
+  useEffect(() => {
+    (async () => {
+      const ip = await Network.getIpAddressAsync();
+      console.log(ip)
+    })();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text>Network Module</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+///////////////////////////////////////////////////////////////////////////////////////////
+
+Storage: 
+
+ How to store data in mobile device.
+
+expo-sqlite gives your app access to a database that can be queried through a WebSQL-like API. The database is persisted across restarts of your app.
+
+expo install expo-sqlite
+
+How to use sqllite in our project?
+
+import * as SQLite from 'expo-sqlite';
+
+Database db = SQLite.openDatabase(name,version,desc,size)
+
+
+Database Object methods
+
+Database objects are returned by calls to SQLite.openDatabase(). Such an object represents a connection to a database on your device. They support one method:
+
+db.transaction(callback, error, success)-Execute a database transaction.
+
+A Transaction object is passed in as a parameter to the callback parameter for the db.transaction() method on a Database . It allows enqueuing SQL statements to perform in a database transaction. It supports one method:
+
+tx.executeSql(sqlStatement, arguments, success, error)
+
+ResultSet objects
+
+ResultSet objects are returned through second parameter of the success callback for the tx.executeSql() method on a Transaction
+
+
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Constants from 'expo-constants';
+import * as SQLite from 'expo-sqlite';
+
+
+const db = SQLite.openDatabase("db.db");
+
+function Items({ done: doneHeading, onPressItem }) {
+    const [items, setItems] = React.useState(null);
+
+    React.useEffect(() => {
+        db.transaction(tx => {
+            tx.executeSql(
+                `select * from items where done = ?;`,
+                [doneHeading ? 1 : 0],
+                (_, { rows: { _array } }) => setItems(_array)
+            );
+        });
+    }, []);
+
+    const heading = doneHeading ? "Completed" : "Todo";
+
+    if (items === null || items.length === 0) {
+        return null;
+    }
+
+    return (
+        <View style={styles.sectionContainer}>
+            <Text style={styles.sectionHeading}>{heading}</Text>
+            {items.map(({ id, done, value }) => (
+                <TouchableOpacity
+                    key={id}
+                    onPress={() => onPressItem && onPressItem(id)}
+                    style={{
+                        backgroundColor: done ? "#1c9963" : "#fff",
+                        borderColor: "#000",
+                        borderWidth: 1,
+                        padding: 8
+                    }}
+                >
+                    <Text style={{ color: done ? "#fff" : "#000" }}>{value}</Text>
+                </TouchableOpacity>
+            ))}
+        </View>
+    );
+}
+
+export default function App() {
+    const [text, setText] = React.useState(null)
+    const [forceUpdate, forceUpdateId] = useForceUpdate()
+
+ 
+
+    React.useEffect(() => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "create table if not exists items (id integer primary key not null, done int, value text);"
+            );
+        });
+    }, []);
+
+    const add = (text) => {
+        // is text empty?
+        if (text === null || text === "") {
+            return false;
+        }
+
+        db.transaction(
+            tx => {
+                tx.executeSql("insert into items (done, value) values (0, ?)", [text]);
+                tx.executeSql("select * from items", [], (_, { rows }) =>
+                    console.log(JSON.stringify(rows))
+                );
+            },
+            null,
+            forceUpdate
+        );
+    }
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.heading}>SQLite Example</Text>
+            <View style={styles.flexRow}>
+                <TextInput
+                    onChangeText={text => setText(text)}
+                    onSubmitEditing={() => {
+                        add(text);
+                        setText(null);
+                    }}
+                    placeholder="what do you need to do?"
+                    style={styles.input}
+                    value={text}
+                />
+            </View>
+            <ScrollView style={styles.listArea}>
+                <Items
+                    key={`forceupdate-todo-${forceUpdateId}`}
+                    done={false}
+                    onPressItem={id =>
+                        db.transaction(
+                            tx => {
+                                tx.executeSql(`update items set done = 1 where id = ?;`, [
+                                    id
+                                ]);
+                            },
+                            null,
+                            forceUpdate
+                        )
+                    }
+                />
+                <Items
+                    done
+                    key={`forceupdate-done-${forceUpdateId}`}
+                    onPressItem={id =>
+                        db.transaction(
+                            tx => {
+                                tx.executeSql(`delete from items where id = ?;`, [id]);
+                            },
+                            null,
+                            forceUpdate
+                        )
+                    }
+                />
+            </ScrollView>
+        </View>
+    );
+
+}
+
+function useForceUpdate() {
+    const [value, setValue] = useState(0);
+    return [() => setValue(value + 1), value];
+}
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "#fff",
+        flex: 1,
+        paddingTop: Constants.statusBarHeight
+    },
+    heading: {
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    flexRow: {
+        flexDirection: "row"
+    },
+    input: {
+        borderColor: "#4630eb",
+        borderRadius: 4,
+        borderWidth: 1,
+        flex: 1,
+        height: 48,
+        margin: 16,
+        padding: 8
+    },
+    listArea: {
+        backgroundColor: "#f0f0f0",
+        flex: 1,
+        paddingTop: 16
+    },
+    sectionContainer: {
+        marginBottom: 16,
+        marginHorizontal: 16
+    },
+    sectionHeading: {
+        fontSize: 18,
+        marginBottom: 8
+    }
+});
+/////////////////////////////////////////////////////////////////////////////////////////////
+Redux Advanced Features:
+........................
+
+How to write more reducers,More components.
+
+Points:
+
+1.We can have more reducers
+2.We can have only one store.
+
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { createStore, combineReducers } from 'redux';
+import { connect, Provider } from 'react-redux';
+
+//action constants
+const INCREMENT = 'INCREMENT'
+const DECREMENT = 'DECREMENT';
+
+//reducer
+const incrementReducer = (state = 10, { type }) => {
+    switch (type) {
+        case INCREMENT:
+            return state + 1;
+        default:
+            return state;
+    }
+};
+const decrementReducer = (state = 100, { type }) => {
+    switch (type) {
+        case DECREMENT:
+            return state - 1;
+        default:
+            return state;
+    }
+};
+
+// const rootReducer = combineReducers({
+//     increment: incrementReducer,
+//     decrement: decrementReducer
+// });
+// const rootReducer = combineReducers({
+//     incrementReducer: incrementReducer,
+//     decrementReducer: decrementReducer
+// });
+const rootReducer = combineReducers({
+    incrementReducer,
+    decrementReducer
+});
+
+//create store
+const store = createStore(rootReducer);
+
+// store.subscribe(function () {
+//     console.log(store.getState());
+// });
+
+// store.dispatch({ type: INCREMENT })
+//Create Containers
+/////////////////////////////////////////////////////////////////////////////////
+//Mapper function: extract data from redux reducer(state) supply to React Component(props)
+//here we two reducer, then how to mapper function
+
+// function mapStateToPropIncr(state) {
+//     const value = state.incrementReducer
+//     return {
+//         incvalue: value
+//     }
+// }
+const mapStateToPropIncr = state => {
+    const incvalue = state.incrementReducer
+    return {
+        incvalue
+    }
+}
+
+const mapStateToPropDecr(state) => {
+    const decvalue = state.decrementReducer
+    return {
+        decvalue
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+function IncrementComponent(props) {
+    //event listener
+    function onIncrement(e) {
+        //TODO
+        props.dispatch({ type: INCREMENT })
+    }
+    return <View>
+        <Text>Increment : {props.incvalue}</Text>
+        <Button onPress={onIncrement} title="+" />
+    </View>
+}
+function DecrementComponent(props) {
+    //event listener
+    function onDecrement(e) {
+        //TODO
+        props.dispatch({ type: DECREMENT })
+    }
+    return <View>
+        <Text>Decrement : {props.decvalue}</Text>
+        <Button onPress={onDecrement} title="-" />
+    </View>
+}
+//create Containers
+const IncrementContainer = connect(mapStateToPropIncr)(IncrementComponent)
+const DecrementContainer = connect(mapStateToPropDecr)(DecrementComponent)
+
+export default function App() {
+    return (<Provider store={store}>
+        <View style={styles.container}>
+            <IncrementContainer />
+            <DecrementContainer />
+            <StatusBar style="auto" />
+        </View>
+    </Provider>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Refactored Code : refere  code repository
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+Types of Actions:
+
+1.sync action
+2.async action
+
+Redux work flow: Sync work flow
+
+View(Button)--pressButton---props.dispatch(action)---store---will call reducer--returns state--to store----subscribe method is called----new state is returned to view.
+
+
+Async work flow:
+
+1.where should i write api calls in redux.
+2.where should i write async programming- timers,websocket..?
+
+Reducer? - No
+ Reducer is just function, pure function, returns new state only. it wont have any
+async logic.
+
+Async actions: Redux Middleware and Side Effects#
+.................................................
+
+What is middleware?
+
+ middleware is a js function, which stops calling reducers immediatly until async operations
+are completed.
+
+lets say i want to call api, that should return data to ui.
+
+List Component-------------Expects data from api------
+
+View(Button)--pressButton---props.dispatch(action asking data from api)---store---|stop calling reducer until data is ready.
+
+
+middlewares:
+
+What exactly is middleware?
+
+ Generally speaking middleware is something that goes between parts A and B of an application to transform what A sends before passing it to B. So instead of having:
+ A -----> B
+ we end up having
+ A ---> middleware 1 ---> middleware 2 ---> middleware N --> ... ---> B
+
+how to write middleware ?
+
+middleware is just javascript curry function / higher order function.
+eg: connect is curry function.
+
+Higher order function:
+
+//how to write curry function.
+
+/* function makeCake(milk) {
+      return function (sugar) {
+            return function (bread) {
+                  return function (cream) {
+                        return function (color) {
+                              //coimbine all data and return
+                              return `${milk}${sugar}${bread}${cream}${color}`;
+                        }
+                  }
+            }
+      }
+} */
+const makeCake = milk => sugar => bread => cream => color => `${milk}${sugar}${bread}${cream}${color}`
+//hof
+const cake = makeCake('milk')('sugar')('bread')('cream')('color')
+console.log(cake);
+
+.....................*************...........................................
+
+Middleware syntax:
+
+ const anyMiddleware = function (store) {
+        return function(next) {
+            return function (action) {
+                // your middleware-specific code goes here
+               api call once done,with data, you can do store.dispatch()
+
+               
+            }
+        }
+    }
+
+store:
+  store object here is used to redispatch action once async operation is completed.
+
+next:
+  is just variable used to move from middleware to reducer or another middleare
+ middlewares can be chained
+   a---  b --- c --d --n --reducer
+     next  next 
+
+action:
+  which represents action object 
+
+
+  var anyMiddleware = function (store) {
+        return function(next) {
+            return function (action) {
+                // your middleware-specific code goes here
+
+		return next(action);
+    }
+     
+
+Point:
+
+1.middlewares can be used for various purposes like logging,async wrappers.
+
+//Welcome Middleware 
+const WelcomeMiddleware = function (store) {
+      return function (next) {
+            return function (action) {
+                  // your middleware-specific code goes here
+                  console.info(`Welcome to Redux`);
+                  return next(action);
+            }
+      }
+};
+//Logger Middleware
+/* const Logger = function (store) {
+      return function (next) {
+            return function (action) {
+                  // your middleware-specific code goes here
+                  console.log('dispatching', action)
+                  let result = next(action)
+                  console.log('next state', store.getState())
+                  return result
+            }
+      }
+}; */
+
+How to integrate middlewares to existing redux store?
+
+const middlewareConfig = applyMiddleware(WelcomeMiddleware, Logger);
+
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { incrementReducer, decrementReducer } from './reducers'
+
+//middleware code 
+const WelcomeMiddleware = function (store) {
+    return function (next) {
+        return function (action) {
+            // your middleware-specific code goes here
+            console.info(`Welcome to Redux`);
+            return next(action);
+        }
+    }
+};
+const Logger = function (store) {
+    return function (next) {
+        return function (action) {
+            // your middleware-specific code goes here
+            console.log('dispatching', action)
+            let result = next(action)
+            console.log('next state', store.getState())
+            return result
+        }
+    }
+};
+
+const middlewareConfig = applyMiddleware(WelcomeMiddleware, Logger);
+const rootReducer = combineReducers({
+    incrementReducer,
+    decrementReducer
+});
+//create store
+const store = createStore(rootReducer, middlewareConfig);
+
+export { store }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+Types of Middlewares:
+
+1.custom middleware 
+   written by us - Logger,WelcomeMiddleware
+2.third party middlewares
+  provided by third parties
+
+In order to write async operations, there are third party middlewares available.
+
+User---store.dispatch(findAllTodos())------->middleware--->
+	
+ middleware waits for response----->dispatch({type:'FINDALLTODS'},response)-->
+
+	store--->will call reducer with response---reducer is called -->
+		
+		store is updated----->React subscribe the data.
+
+Async Implementations:
+
+1.timers
+2.Rest calls
+3.Web socket calls
+.....
+
+how to dispatch actions?
+
+1.by sending action object
+
+ store.dispatch({type:'INCREMENT',payload:1});
+
+2.by calling action creator ; function
+
+  function incrementCreator(payload){
+
+     //action object 
+     return {
+       type:INCREMENT,
+       payload
+     }
+  }
+
+
+Async Implementation: timers:
+..............................
+
+function incActionCreator(payload) {
+    setTimeout(function () {
+        return {
+            type: INCREMENT,
+            payload
+        }
+    }, 2000)
+}
+export { incActionCreator };
+
+when you call this redux will throw error.
+
+Error: Actions must be plain objects. Use custom middleware for async actions.
+
+
+How to solve this?
+
+We need to use async middlewares which is third party.
+
+Third party async middlewares
+
+1.redux-thunk
+2.redux-promise
+3.redux-saga
+4.redux-observable
+
+
+Setup thunk.
+
+>npm i redux-thunk
+
+//without middleware
+/*function incActionCreator(payload) {
+    setTimeout(function () {
+        return {
+            type: INCREMENT,
+            payload
+        }
+    }, 2000)
+} */
+function incActionCreator(payload) {
+    //thunk middleware syntax
+    return function (dispatch) {
+        setTimeout(function () {
+            dispatch({
+                type: INCREMENT,
+                payload
+            });
+        }, 3000)
+    }
+}
+
+AJAX CALLS: API CALLS
+
+function findAllTodos() {
+      return function (dispatch) {
+            const url = 'http://localhost:9999/todos'
+            fetch(url).then(res => res.json()).then(todos => {
+                  dispatch({
+                        type: FINDALL,
+                        todos
+                  })
+            });
+      }
+
+}
+
+Final Work flow:
+
+1 Async actions,thunk middleware,container components,React Native routers
+Please refer app.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
